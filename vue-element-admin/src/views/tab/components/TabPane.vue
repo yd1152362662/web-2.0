@@ -45,6 +45,7 @@
       </el-form-item>
     </el-form>
 
+
     <el-table :data="list" border fit highlight-current-row style="width: 100%">
       <el-table-column
         v-loading="loading"
@@ -95,6 +96,8 @@
         </template>
       </el-table-column>
     </el-table>
+
+
     <div class="table-pagination">
       <el-pagination
         @size-change="handleSizeChange"
@@ -106,6 +109,8 @@
         :total="400"
       ></el-pagination>
     </div>
+
+
   </div>
 </template>
 

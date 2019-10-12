@@ -2,7 +2,7 @@
  * @Author: yangdan
  * @Date: 2019-09-19 18:20:19
  * @LastEditors: yangdan
- * @LastEditTime: 2019-09-21 16:26:37
+ * @LastEditTime: 2019-09-24 16:06:48
  * @Description: 添加描述
  -->
 <template>
@@ -32,7 +32,7 @@
         <div class="avatar-wrapper">
           <span v-if="device!=='mobile'">欢迎回来</span>
           <img
-            src="http://img5.imgtn.bdimg.com/it/u=948184960,2600453767&fm=26&gp=0.jpg"
+            src="http://img.mp.itc.cn/upload/20170716/5138ec2c641f4eb7bbb2d9c6e5ae4bd2_th.jpg"
             class="user-avatar"
           />
           <span>西南水泥</span>

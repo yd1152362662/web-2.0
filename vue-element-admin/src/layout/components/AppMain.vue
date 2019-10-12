@@ -2,15 +2,15 @@
  * @Author: yangdan
  * @Date: 2019-09-19 18:20:19
  * @LastEditors: yangdan
- * @LastEditTime: 2019-09-21 17:44:33
+ * @LastEditTime: 2019-10-12 14:48:27
  * @Description: 添加描述
  -->
 <template>
   <section class="app-main">
     <transition name="fade-transform" mode="out-in">
-      <keep-alive :include="cachedViews">
+      <!-- <keep-alive :include="cachedViews"> -->
         <router-view :key="key" />
-      </keep-alive>
+      <!-- </keep-alive> -->
     </transition>
   </section>
 </template>
@@ -63,3 +63,6 @@ export default {
   }
 }
 </style>
+
+
+
