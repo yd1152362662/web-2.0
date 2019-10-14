@@ -3,7 +3,7 @@
  * @Author: yangdan
  * @Date: 2019-09-19 18:20:19
  * @LastEditors: yangdan
- * @LastEditTime: 2019-09-24 15:14:57
+ * @LastEditTime: 2019-10-14 16:31:10
  * @Description: 添加描述
  -->
 <template>
@@ -12,6 +12,7 @@
       <el-col :xs="24" :sm="24" :md="24" :lg="24" :xl="24">
         <div class="login-red">
           <el-row :gutter="10">
+            <!-- 左边的文字 标题 -->
             <el-col :xs="15" :sm="15" :md="15" :lg="15" :xl="15" class="hidden-md-and-down">
               <el-row>
                 <el-col
@@ -44,68 +45,53 @@
                 </el-col>
               </el-row>
             </el-col>
+
+            <!-- 登录 tabs -->
             <el-col :xs="24" :sm="4" :md="4" :lg="4" :xl="4" class="loginShowBox">
               <div class="loginBox">
                 <el-tabs
-                  v-model="loginType"
+                  v-model="loginForm.type"
                   type="card"
                   @tab-click="handleClick"
                   style="padding-top:30px"
                 >
-                  <el-tab-pane label="手机登录" name="first">
+                  <el-tab-pane label="手机登录" name="1">
                     <el-form
-                      ref="loginForm"
+                      ref="loginFormPhone"
                       :model="loginForm"
                       :rules="loginRules"
                       class="login-form"
                       autocomplete="on"
                       label-position="left"
                     >
-                      <el-form-item prop="username">
+                      <el-form-item prop="phone">
                         <span class="svg-container">
                           <svg-icon icon-class="user" />
                         </span>
                         <el-input
-                          ref="username"
-                          v-model="loginForm.username"
-                          placeholder="Username"
-                          name="username"
+                          ref="phone"
+                          v-model="loginForm.phone"
+                          placeholder="手机号码"
+                          name="phone"
                           type="text"
-                          tabindex="1"
                           autocomplete="on"
                         />
                       </el-form-item>
 
-                      <el-tooltip
-                        v-model="capsTooltip"
-                        content="Caps lock is On"
-                        placement="right"
-                        manual
-                      >
-                        <el-form-item prop="password">
-                          <span class="svg-container">
-                            <svg-icon icon-class="password" />
-                          </span>
-                          <el-input
-                            :key="passwordType"
-                            ref="password"
-                            v-model="loginForm.password"
-                            :type="passwordType"
-                            placeholder="Password"
-                            name="password"
-                            tabindex="2"
-                            autocomplete="on"
-                            @keyup.native="checkCapslock"
-                            @blur="capsTooltip = false"
-                            @keyup.enter.native="handleLogin"
-                          />
-                          <span class="show-pwd" @click="showPwd">
-                            <svg-icon
-                              :icon-class="passwordType === 'password' ? 'eye' : 'eye-open'"
-                            />
-                          </span>
-                        </el-form-item>
-                      </el-tooltip>
+                      <el-form-item prop="verificationCode">
+                        <span class="svg-container">
+                          <svg-icon icon-class="password" />
+                        </span>
+                        <el-input
+                          ref="verificationCode"
+                          v-model="loginForm.verificationCode"
+                          placeholder="验证码"
+                          name="verificationCode"
+                          autocomplete="on"
+                          @keyup.enter.native="handleLogin"
+                        />
+                        <el-button class="verificationCode" size="mini" type="danger">获取验证码</el-button>
+                      </el-form-item>
 
                       <el-button
                         :loading="loading"
@@ -115,9 +101,10 @@
                       >登录</el-button>
                     </el-form>
                   </el-tab-pane>
-                  <el-tab-pane label="密码登录" name="second">
+
+                  <el-tab-pane label="密码登录" name="2">
                     <el-form
-                      ref="loginForm"
+                      ref="loginFormPassword"
                       :model="loginForm"
                       :rules="loginRules"
                       class="login-form"
@@ -131,44 +118,31 @@
                         <el-input
                           ref="username"
                           v-model="loginForm.username"
-                          placeholder="Username"
+                          placeholder="用户名"
                           name="username"
                           type="text"
-                          tabindex="1"
                           autocomplete="on"
                         />
                       </el-form-item>
 
-                      <el-tooltip
-                        v-model="capsTooltip"
-                        content="Caps lock is On"
-                        placement="right"
-                        manual
-                      >
-                        <el-form-item prop="password">
-                          <span class="svg-container">
-                            <svg-icon icon-class="password" />
-                          </span>
-                          <el-input
-                            :key="passwordType"
-                            ref="password"
-                            v-model="loginForm.password"
-                            :type="passwordType"
-                            placeholder="Password"
-                            name="password"
-                            tabindex="2"
-                            autocomplete="on"
-                            @keyup.native="checkCapslock"
-                            @blur="capsTooltip = false"
-                            @keyup.enter.native="handleLogin"
-                          />
-                          <span class="show-pwd" @click="showPwd">
-                            <svg-icon
-                              :icon-class="passwordType === 'password' ? 'eye' : 'eye-open'"
-                            />
-                          </span>
-                        </el-form-item>
-                      </el-tooltip>
+                      <el-form-item prop="password">
+                        <span class="svg-container">
+                          <svg-icon icon-class="password" />
+                        </span>
+                        <el-input
+                          :key="passwordType"
+                          ref="password"
+                          v-model="loginForm.password"
+                          :type="passwordType"
+                          placeholder="密码"
+                          name="password"
+                          autocomplete="on"
+                          @keyup.enter.native="handleLogin"
+                        />
+                        <span class="show-pwd" @click="showPwd">
+                          <svg-icon :icon-class="passwordType === 'password' ? 'eye' : 'eye-open'" />
+                        </span>
+                      </el-form-item>
 
                       <el-button
                         :loading="loading"
@@ -181,7 +155,6 @@
                 </el-tabs>
               </div>
             </el-col>
-            <el-col :xs="3" :sm="3" :md="3" :lg="3" :xl="3" class="hidden-md-and-down"></el-col>
           </el-row>
         </div>
       </el-col>
@@ -190,14 +163,13 @@
 </template>
 
 <script>
-import { validUsername } from "@/utils/validate";
+// import { validUsername } from "@/utils/validate";
 
 export default {
   name: "Login",
-  // components: { SocialSign },
   data() {
     const validateUsername = (rule, value, callback) => {
-      if (!validUsername(value)) {
+      if (!value) {
         callback(new Error("请输入用户名"));
       } else {
         callback();
@@ -210,10 +182,30 @@ export default {
         callback();
       }
     };
+
+    const validatePhone = (rule, value, callback) => {
+      if (value.length != 11) {
+        callback(new Error("手机号的长度为11位"));
+      } else {
+        callback();
+      }
+    };
+
+    const validateVerificationCode = (rule, value, callback) => {
+      if (value.length < 6) {
+        callback(new Error("验证码的长度为6位"));
+      } else {
+        callback();
+      }
+    };
+
     return {
       loginForm: {
-        username: "admin",
-        password: "111111"
+        username: "",
+        password: "",
+        phone: "",
+        verificationCode: "",
+        type: "1"
       },
       loginRules: {
         username: [
@@ -221,24 +213,30 @@ export default {
         ],
         password: [
           { required: true, trigger: "blur", validator: validatePassword }
+        ],
+        phone: [{ required: true, trigger: "blur", validator: validatePhone }],
+        verificationCode: [
+          {
+            required: true,
+            trigger: "blur",
+            validator: validateVerificationCode
+          }
         ]
       },
       passwordType: "password",
-      capsTooltip: false,
       loading: false,
-      showDialog: false,
       redirect: undefined,
-      otherQuery: {},
-      loginType: "first"
+      otherQuery: {}
     };
   },
   watch: {
     $route: {
       handler: function(route) {
         const query = route.query;
+        console.log('query', query)
         if (query) {
-          this.redirect = query.redirect;
-          this.otherQuery = this.getOtherQuery(query);
+          this.redirect = '';
+          this.otherQuery = '';
         }
       },
       immediate: true
@@ -273,21 +271,6 @@ export default {
     // window.removeEventListener('storage', this.afterQRScan)
   },
   methods: {
-    checkCapslock({ shiftKey, key } = {}) {
-      if (key && key.length === 1) {
-        if (
-          (shiftKey && (key >= "a" && key <= "z")) ||
-          (!shiftKey && (key >= "A" && key <= "Z"))
-        ) {
-          this.capsTooltip = true;
-        } else {
-          this.capsTooltip = false;
-        }
-      }
-      if (key === "CapsLock" && this.capsTooltip === true) {
-        this.capsTooltip = false;
-      }
-    },
     showPwd() {
       if (this.passwordType === "password") {
         this.passwordType = "";
@@ -299,37 +282,54 @@ export default {
       });
     },
     handleLogin() {
-      this.$refs.loginForm.validate(valid => {
-        if (valid) {
-          this.loading = true;
-          this.$store
-            .dispatch("user/login", this.loginForm)
-            .then(() => {
-              this.$router.push({
-                path: this.redirect || "/",
-                query: this.otherQuery
+      console.log("this.form", this.loginForm);
+      if (parseInt(this.loginForm.type) === 1) {
+        this.$refs.loginFormPhone.validate(valid => {
+          console.log("valid", valid);
+          if (valid) {
+            this.loading = true;
+            this.$store
+              .dispatch("user/login", this.loginForm)
+              .then(() => {
+                this.$router.push({
+                  path: this.redirect || "/",
+                });
+                this.loading = false;
+              })
+              .catch(() => {
+                this.loading = false;
               });
-              this.loading = false;
-            })
-            .catch(() => {
-              this.loading = false;
-            });
-        } else {
-          console.log("提交错误");
-          return false;
-        }
-      });
-    },
-    getOtherQuery(query) {
-      return Object.keys(query).reduce((acc, cur) => {
-        if (cur !== "redirect") {
-          acc[cur] = query[cur];
-        }
-        return acc;
-      }, {});
+          } else {
+             this.$message.error('提交错误');
+            return false;
+          }
+        });
+      } else {
+        this.$refs.loginFormPassword.validate(valid => {
+          console.log("valid", valid);
+          if (valid) {
+            this.loading = true;
+            this.$store
+              .dispatch("user/login", this.loginForm)
+              .then(() => {
+                this.$router.push({
+                  path: this.redirect || "/",
+                });
+                this.loading = false;
+              })
+              .catch(() => {
+                this.loading = false;
+              });
+          } else {
+            this.$message.error('提交错误');
+            return false;
+          }
+        });
+      }
     },
     handleClick(tab, event) {
-      console.log(tab, event);
+      this.loginForm.type = tab.name;
+      console.log("tab", tab.name);
     }
   }
 };
@@ -524,6 +524,13 @@ $light_gray: #eee;
     color: $dark_gray;
     cursor: pointer;
     user-select: none;
+  }
+  .verificationCode {
+    position: absolute;
+    right: 3px;
+    top: 3px;
+    font-size: 16px;
+    cursor: pointer;
   }
 
   .thirdparty-button {

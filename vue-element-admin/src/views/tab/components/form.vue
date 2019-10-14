@@ -2,7 +2,7 @@
  * @Author: yangdan
  * @Date: 2019-10-12 15:31:58
  * @LastEditors: yangdan
- * @LastEditTime: 2019-10-12 17:10:39
+ * @LastEditTime: 2019-10-14 12:27:46
  * @Description: 添加描述
  -->
 <template>
@@ -15,6 +15,7 @@
     size="mini"
   >
     <slot name="formItem" />
+
     <el-form-item
       v-for="(item,index) in formConfig.formItemList"
       :key="index"
@@ -28,6 +29,7 @@
         :clearable="true"
         :placeholder="item.placeholder"
       ></el-input>
+
       <el-select
         :clearable="true"
         v-else-if="item.type=='select'"
@@ -64,6 +66,7 @@
         end-placeholder="结束日期"
         align="right"
       ></el-date-picker>
+
     </el-form-item>
     <div class="searchBtn">
       <el-button-group>
@@ -116,7 +119,7 @@ export default {
 </script>
 
 <style scoped>
-  .el-select-dropdown__wrap {
-    margin-bottom: -16px !important;
-  }
+.el-select-dropdown__wrap {
+  margin-bottom: -16px !important;
+}
 </style>

@@ -2,7 +2,7 @@
  * @Author: yangdan
  * @Date: 2019-09-19 18:20:19
  * @LastEditors: yangdan
- * @LastEditTime: 2019-10-12 16:22:26
+ * @LastEditTime: 2019-10-14 17:24:14
  * @Description: 添加描述
  -->
 <template>
@@ -20,7 +20,12 @@
         <keep-alive>
           <div>
             <searchForm :formConfig="formConfig" :value="form"></searchForm>
-            <MyTable class="MyTable" :table="dataTable" @handleSubmit="haha"></MyTable>
+            <MyTable
+              class="MyTable"
+              :table="dataTable"
+              @HandleAnotherOrderFun="HandleAnotherOrder"
+              @HandleViewDetailsFun="HandleViewDetails"
+            ></MyTable>
           </div>
         </keep-alive>
       </el-tab-pane>
@@ -66,18 +71,33 @@ export default {
             prop: "two",
             minWidth: "80",
             show: true
+          },
+          {
+            id: "3",
+            label: "订单状态",
+            prop: "state",
+            minWidth: "80",
+            show: 'template',
           }
         ], // 表格行数据
         data: [
           {
             id: 1,
             one: "haha1234",
-            two: "two"
+            two: "two",
+            state: 1
           },
           {
             id: 2,
             one: "haha2",
-            two: "two"
+            two: "two",
+            state: 2
+          },
+          {
+            id: 3,
+            one: "haha2",
+            two: "two",
+            state: 3
           }
         ], // 表格内容数据
         operation: {
@@ -88,15 +108,15 @@ export default {
           data: [
             // 操作列数据
             {
-              label: "编辑", // 按钮文字
-              Fun: "handleSubmit", // 点击按钮后触发的父组件事件
+              label: "再来一单", // 按钮文字
+              Fun: "HandleAnotherOrderFun", // 点击按钮后触发的父组件事件
               size: "mini", // 按钮大小
               id: "1", // 按钮循环组件的key值
               classname: "show" // 按钮的类名
             },
             {
-              label: "删除", // 按钮文字
-              Fun: "handleSubmit", // 点击按钮后触发的父组件事件
+              label: "查看", // 按钮文字
+              Fun: "HandleViewDetailsFun", // 点击按钮后触发的父组件事件
               size: "mini", // 按钮大小
               id: "2", // 按钮循环组件的key值
               classname: "show" // 按钮的类名
@@ -124,18 +144,10 @@ export default {
             optList: [{ label: "12313", value: "1" }]
           },
           {
-            type: "date",
-            prop: "startTime",
-            dateFormate: "yyyy-MM-dd",
-            label: "发布时间",
-            placeholder: "请选择初始时间"
-          },
-          {
             type: "datetimerange",
             prop: "datetimerange",
             dateFormate: "yyyy-MM-dd hh:mm:ss",
-            label: "承诺停用时间",
-            placeholder: "请选择结束时间",
+            label: "发布时间",
             pickerOptions: {
               shortcuts: [
                 {
@@ -169,11 +181,22 @@ export default {
             }
           },
           {
-            type: "select",
-            prop: "direction",
-            label: "话务方向",
-            placeholder: "话务方向",
-            optList: []
+            type: "input",
+            prop: "PlateNumber",
+            label: "车牌号",
+            placeholder: "请输入车牌号"
+          },
+          {
+            type: "input",
+            prop: "OrderNumber",
+            label: "订单号",
+            placeholder: "请输入订单号"
+          },
+          {
+            type: "input",
+            prop: "ShipmentNumber",
+            label: "承运单号",
+            placeholder: "请输入承运单号"
           }
         ],
         operate: [
@@ -190,7 +213,7 @@ export default {
   },
   watch: {
     activeName(val) {
-      this.$router.push(`${this.$route.path}?tab=${val}`);
+      this.$router.push(`${this.$route.path}`);
     }
   },
   created() {
@@ -204,8 +227,11 @@ export default {
     showCreatedTimes() {
       this.createdTimes = this.createdTimes + 1;
     },
-    haha() {
-      console.log("object");
+    HandleAnotherOrder() {
+      console.log("再来一单");
+    },
+    HandleViewDetails() {
+      console.log("查看详情");
     },
     search() {
       console.log("form", this.form);

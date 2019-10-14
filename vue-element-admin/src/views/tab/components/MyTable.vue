@@ -2,7 +2,7 @@
  * @Author: yangdan
  * @Date: 2019-10-12 10:30:36
  * @LastEditors: yangdan
- * @LastEditTime: 2019-10-12 15:24:38
+ * @LastEditTime: 2019-10-14 18:06:35
  * @Description: 添加描述
  -->
 
@@ -34,8 +34,14 @@
             :width="item.width ? item.width : ''"
             :min-width="item.minWidth ? item.minWidth : ''"
           >
-            <template slot-scope="scope">
+            <!-- <template slot-scope="scope">
               <slot :name="item.prop" :obj="scope"></slot>
+            </template> -->
+            <template slot-scope="scope">
+              <el-tag
+                :type="scope.row.state === 1 ? 'primary' : 'success'"
+                close-transition
+              >{{scope.row.state}}</el-tag>
             </template>
           </el-table-column>
           <el-table-column
@@ -202,7 +208,8 @@ export default {
     },
     handleCurrentChange(val) {
       console.log(`当前页: ${val}`);
-    }
+    },
+
   }
 };
 </script>
