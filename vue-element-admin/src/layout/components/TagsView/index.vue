@@ -2,7 +2,7 @@
  * @Author: yangdan
  * @Date: 2019-09-17 17:15:48
  * @LastEditors: yangdan
- * @LastEditTime: 2019-09-21 16:44:42
+ * @LastEditTime: 2019-10-15 15:22:29
  * @Description: 添加描述
  -->
 <template>
@@ -221,7 +221,7 @@ export default {
       margin-left: 5px;
       margin-top: 4px;
       &:first-of-type {
-        margin-left: 15px;
+        margin-left: 25px;
       }
       &:last-of-type {
         margin-right: 15px;

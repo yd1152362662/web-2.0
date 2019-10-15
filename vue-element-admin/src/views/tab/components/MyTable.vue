@@ -2,7 +2,7 @@
  * @Author: yangdan
  * @Date: 2019-10-12 10:30:36
  * @LastEditors: yangdan
- * @LastEditTime: 2019-10-14 18:06:35
+ * @LastEditTime: 2019-10-15 11:10:38
  * @Description: 添加描述
  -->
 
@@ -36,12 +36,13 @@
           >
             <!-- <template slot-scope="scope">
               <slot :name="item.prop" :obj="scope"></slot>
-            </template> -->
+            </template>-->
             <template slot-scope="scope">
               <el-tag
-                :type="scope.row.state === 1 ? 'primary' : 'success'"
+                :color="InitColor(scope.row.state)"
+                style="color:#fff"
                 close-transition
-              >{{scope.row.state}}</el-tag>
+              >{{InitState(scope.row.state)}}</el-tag>
             </template>
           </el-table-column>
           <el-table-column
@@ -79,7 +80,7 @@
           @current-change="handleCurrentChange"
           :current-page="table.pagination.currentPage  || 0"
           :page-sizes="[10, 20, 30, 40]"
-          :page-size="10"
+          :page-size="table.pagination.size ||10"
           layout="total, sizes, prev, pager, next, jumper"
           :total="table.pagination.total || 0"
         ></el-pagination>
@@ -205,11 +206,36 @@ export default {
     },
     handleSizeChange(val) {
       console.log(`每页 ${val} 条`);
+      this.$emit("handleSizeChangeFun", val);
     },
     handleCurrentChange(val) {
       console.log(`当前页: ${val}`);
+      this.$emit("handleCurrentChangeFun", val);
     },
-
+    InitState(val) {
+      switch (val) {
+        case 0:
+          return "未接单";
+          break;
+        case 1:
+          return "运输中";
+          break;
+        default:
+          return "其他状态";
+      }
+    },
+    InitColor(val) {
+      switch (val) {
+        case 0:
+          return "blue";
+          break;
+        case 1:
+          return "orange";
+          break;
+        default:
+          return "red";
+      }
+    }
   }
 };
 </script>

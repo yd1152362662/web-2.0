@@ -2,7 +2,7 @@
  * @Author: yangdan
  * @Date: 2019-09-19 18:20:19
  * @LastEditors: yangdan
- * @LastEditTime: 2019-10-14 17:24:14
+ * @LastEditTime: 2019-10-15 13:37:48
  * @Description: 添加描述
  -->
 <template>
@@ -25,6 +25,8 @@
               :table="dataTable"
               @HandleAnotherOrderFun="HandleAnotherOrder"
               @HandleViewDetailsFun="HandleViewDetails"
+              @handleSizeChangeFun="handleSizeChange"
+              @handleCurrentChangeFun="handleCurrentChange"
             ></MyTable>
           </div>
         </keep-alive>
@@ -48,13 +50,14 @@ export default {
   data() {
     return {
       tabMapOptions: [
-        { label: "当前货源", key: "当前货源" },
-        { label: "最新发布", key: "最新发布" },
-        { label: "在途运输", key: "在途运输" },
-        { label: "完成订单", key: "完成订单" }
+        { label: "当前货源", key: "1" },
+        { label: "最新发布", key: "2" },
+        { label: "在途运输", key: "3" },
+        { label: "完成订单", key: "4" }
       ],
-      activeName: "当前货源",
+      activeName: "1",
       createdTimes: 0,
+      // table的数据和配置
       dataTable: {
         hasOperation: true,
         tr: [
@@ -77,7 +80,7 @@ export default {
             label: "订单状态",
             prop: "state",
             minWidth: "80",
-            show: 'template',
+            show: "template"
           }
         ], // 表格行数据
         data: [
@@ -125,9 +128,11 @@ export default {
         },
         pagination: {
           currentPage: 1,
+          size: 10,
           total: 40
         }
       },
+      // form的数据和配置
       formConfig: {
         formItemList: [
           {
@@ -208,6 +213,7 @@ export default {
           }
         ]
       },
+      //得到的form的数据
       form: {}
     };
   },
@@ -235,7 +241,18 @@ export default {
     },
     search() {
       console.log("form", this.form);
-    }
+    },
+    handleSizeChange(val) {
+      console.log("每页数val", val);
+      this.$set(this.dataTable.pagination, "size", val);
+      console.log("this.dataTable.pagination", this.dataTable.pagination);
+    },
+    handleCurrentChange(val) {
+      console.log("当前页数val", val);
+      this.$set(this.dataTable.pagination, "currentPage", val);
+      console.log("this.dataTable.pagination", this.dataTable.pagination);
+    },
+
   }
 };
 </script>

@@ -2,7 +2,7 @@
  * @Author: yangdan
  * @Date: 2019-09-19 18:20:19
  * @LastEditors: yangdan
- * @LastEditTime: 2019-09-21 17:02:35
+ * @LastEditTime: 2019-10-15 15:15:08
  * @Description: 添加描述
  -->
 <template>
@@ -95,11 +95,12 @@ export default {
   background-size: 100% 53px;
   /deep/ {
     .el-scrollbar__bar {
-      bottom: 0px;
+      bottom: -8px;
     }
     .el-scrollbar__wrap {
       height: 53px;
-      margin-bottom: -15px;
+      margin-bottom: -15px !important;
+
     }
   }
 }

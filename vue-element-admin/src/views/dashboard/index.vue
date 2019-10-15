@@ -1,3 +1,10 @@
+<!--
+ * @Author: yangdan
+ * @Date: 2019-09-19 18:20:19
+ * @LastEditors: yangdan
+ * @LastEditTime: 2019-09-19 18:20:19
+ * @Description: 添加描述
+ -->
 <template>
   <div class="dashboard-container">
     <component :is="currentRole" />
@@ -6,7 +13,7 @@
 
 <script>
 import { mapGetters } from 'vuex'
-import adminDashboard from './admin'
+import adminDashboard from './home'
 import editorDashboard from './editor'
 
 export default {
