@@ -2,7 +2,7 @@
  * @Author: yangdan
  * @Date: 2019-10-15 14:15:54
  * @LastEditors: yangdan
- * @LastEditTime: 2019-10-15 18:01:22
+ * @LastEditTime: 2019-10-16 10:30:51
  * @Description: 添加描述
  -->
 <template>
@@ -43,7 +43,5 @@ export default {
   .el-divider--horizontal {
     margin: 24px  0 10px 0;
   }
-
-
 }
 </style>

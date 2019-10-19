@@ -1,3 +1,10 @@
+/*
+ * @Author: yangdan
+ * @Date: 2019-09-19 18:20:19
+ * @LastEditors: yangdan
+ * @LastEditTime: 2019-10-19 10:15:53
+ * @Description: 添加描述
+ */
 import router from './router'
 import store from './store'
 import { Message } from 'element-ui'
@@ -9,6 +16,7 @@ import getPageTitle from '@/utils/get-page-title'
 NProgress.configure({ showSpinner: false }) // NProgress Configuration
 
 const whiteList = ['/login', '/auth-redirect'] // no redirect whitelist
+
 
 router.beforeEach(async(to, from, next) => {
   // start progress bar

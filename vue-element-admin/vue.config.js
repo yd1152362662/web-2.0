@@ -2,7 +2,7 @@
  * @Author: yangdan
  * @Date: 2019-09-19 18:18:51
  * @LastEditors: yangdan
- * @LastEditTime: 2019-09-24 15:34:20
+ * @LastEditTime: 2019-10-19 11:49:29
  * @Description: 添加描述
  */
 'use strict'
@@ -45,7 +45,7 @@ module.exports = {
       // detail: https://cli.vuejs.org/config/#devserver-proxy
       [process.env.VUE_APP_BASE_API]: {
         target: `http://127.0.0.1:${port}/mock`,
-        // target: `https://test.fantudl.com`,
+        // target: `https://jsonplaceholder.typicode.com`,
         changeOrigin: true,
         pathRewrite: {
           ['^' + process.env.VUE_APP_BASE_API]: ''

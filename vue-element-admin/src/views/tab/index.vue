@@ -2,36 +2,40 @@
  * @Author: yangdan
  * @Date: 2019-09-19 18:20:19
  * @LastEditors: yangdan
- * @LastEditTime: 2019-10-15 13:37:48
+ * @LastEditTime: 2019-10-16 17:00:39
  * @Description: 添加描述
  -->
 <template>
-  <div class="tab-container">
-    <el-tabs v-model="activeName" style="margin-top:15px;" type="border-card">
-      <el-tab-pane
-        v-for="item in tabMapOptions"
-        :key="item.key"
-        :label="item.label"
-        :name="item.key"
-      >
-        <!-- <keep-alive>
+  <div class="basic-box">
+    <div class="container-box">
+      <el-tabs v-model="activeName" class="basic-border">
+        <el-tab-pane
+          v-for="item in tabMapOptions"
+          :key="item.key"
+          :label="item.label"
+          :name="item.key"
+        >
+          <!-- <keep-alive>
           <tab-pane v-if="activeName==item.key" :type="item.key" @create="showCreatedTimes" />
-        </keep-alive>-->
-        <keep-alive>
-          <div>
-            <searchForm :formConfig="formConfig" :value="form"></searchForm>
-            <MyTable
-              class="MyTable"
-              :table="dataTable"
-              @HandleAnotherOrderFun="HandleAnotherOrder"
-              @HandleViewDetailsFun="HandleViewDetails"
-              @handleSizeChangeFun="handleSizeChange"
-              @handleCurrentChangeFun="handleCurrentChange"
-            ></MyTable>
-          </div>
-        </keep-alive>
-      </el-tab-pane>
-    </el-tabs>
+          </keep-alive>-->
+          <keep-alive>
+            <div>
+              <searchForm :formConfig="formConfig" :value="form">
+                <el-button slot="operate" @click="handleDownload">导出表格</el-button>
+              </searchForm>
+              <MyTable
+                class="MyTable"
+                :table="dataTable"
+                @HandleAnotherOrderFun="HandleAnotherOrder"
+                @HandleViewDetailsFun="HandleViewDetails"
+                @handleSizeChangeFun="handleSizeChange"
+                @handleCurrentChangeFun="handleCurrentChange"
+              ></MyTable>
+            </div>
+          </keep-alive>
+        </el-tab-pane>
+      </el-tabs>
+    </div>
   </div>
 </template>
 
@@ -214,7 +218,11 @@ export default {
         ]
       },
       //得到的form的数据
-      form: {}
+      form: {},
+      downloadLoading: false,
+      filename: "",
+      autoWidth: true,
+      bookType: "xlsx"
     };
   },
   watch: {
@@ -235,6 +243,25 @@ export default {
     },
     HandleAnotherOrder() {
       console.log("再来一单");
+
+      this.$confirm("<strong>这是 <i>HTML</i> 片段</strong>", "我是标题", {
+        confirmButtonText: "确定",
+        cancelButtonText: "取消",
+        center: true,
+        dangerouslyUseHTMLString: true
+      })
+        .then(() => {
+          this.$message({
+            type: "success",
+            message: "删除成功!"
+          });
+        })
+        .catch(() => {
+          this.$message({
+            type: "info",
+            message: "已取消删除"
+          });
+        });
     },
     HandleViewDetails() {
       console.log("查看详情");
@@ -252,7 +279,46 @@ export default {
       this.$set(this.dataTable.pagination, "currentPage", val);
       console.log("this.dataTable.pagination", this.dataTable.pagination);
     },
+    handleDownload() {
+      this.downloadLoading = true;
 
+      import("@/vendor/Export2Excel").then(excel => {
+        const tHeader = ["第一行", "第二行", "状态值"];
+        const filterVal = ["one", "two", "state"];
+        const list = this.dataTable.data;
+        const data = this.formatJson(filterVal, list);
+        excel.export_json_to_excel({
+          header: tHeader,
+          data,
+          filename: this.filename,
+          autoWidth: this.autoWidth,
+          bookType: this.bookType
+        });
+        this.downloadLoading = false;
+      });
+    },
+    formatJson(filterVal, jsonData) {
+      return jsonData.map(v =>
+        filterVal.map(j => {
+          console.log("j", j);
+          if (j === "state") {
+            return this.stateChange(v[j]);
+          } else {
+            return v[j];
+          }
+        })
+      );
+    },
+    stateChange(state) {
+      switch (state) {
+        case 1:
+          return "运输中";
+          break;
+        default:
+          return "其他状态";
+          break;
+      }
+    }
   }
 };
 </script>

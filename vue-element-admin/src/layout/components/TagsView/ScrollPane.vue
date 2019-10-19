@@ -2,7 +2,7 @@
  * @Author: yangdan
  * @Date: 2019-09-19 18:20:19
  * @LastEditors: yangdan
- * @LastEditTime: 2019-10-15 15:15:08
+ * @LastEditTime: 2019-10-16 11:08:45
  * @Description: 添加描述
  -->
 <template>
@@ -99,7 +99,7 @@ export default {
     }
     .el-scrollbar__wrap {
       height: 53px;
-      margin-bottom: -15px !important;
+      margin-bottom: -16px !important;
 
     }
   }

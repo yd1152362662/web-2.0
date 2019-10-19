@@ -2,14 +2,14 @@
  * @Author: yangdan
  * @Date: 2019-09-19 18:20:19
  * @LastEditors: yangdan
- * @LastEditTime: 2019-10-12 14:48:27
+ * @LastEditTime: 2019-10-16 15:52:03
  * @Description: 添加描述
  -->
 <template>
   <section class="app-main">
     <transition name="fade-transform" mode="out-in">
       <!-- <keep-alive :include="cachedViews"> -->
-        <router-view :key="key" />
+      <router-view :key="key" />
       <!-- </keep-alive> -->
     </transition>
   </section>
@@ -17,16 +17,16 @@
 
 <script>
 export default {
-  name: 'AppMain',
+  name: "AppMain",
   computed: {
     cachedViews() {
-      return this.$store.state.tagsView.cachedViews
+      return this.$store.state.tagsView.cachedViews;
     },
     key() {
-      return this.$route.path
+      return this.$route.path;
     }
   }
-}
+};
 </script>
 
 <style lang="scss" scoped>
@@ -38,9 +38,9 @@ export default {
   overflow: hidden;
 }
 
-.fixed-header+.app-main {
+.fixed-header + .app-main {
   padding-top: 50px;
-  background-color: #f0f2f5
+  background-color: #f0f2f5;
 }
 
 .hasTagsView {
@@ -49,7 +49,7 @@ export default {
     min-height: calc(100vh - 84px);
   }
 
-  .fixed-header+.app-main {
+  .fixed-header + .app-main {
     padding-top: 120px;
   }
 }
@@ -62,7 +62,31 @@ export default {
     padding-right: 15px;
   }
 }
+
+.basic-box {
+  padding: 0 27px;
+  background-color: rgb(240, 242, 245);
+  background-image: url("../../assets/home/bg.png");
+  background-repeat: no-repeat;
+  background-size: 100% 296px;
+  position: relative;
+}
+.container-box {
+  padding: 25px 38px;
+  background-color: rgb(255, 255, 255);
+}
+.basic-border {
+  box-shadow: 0px 2px 20px 0px rgba(36, 139, 242, 0.13);
+  border-radius: 10px;
+  border: 1px solid rgba(188, 218, 248, 1);
+  padding:15px 32px;
+}
+
 </style>
+
+
+
+
 
 
 

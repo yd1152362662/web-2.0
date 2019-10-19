@@ -2,7 +2,7 @@
  * @Author: yangdan
  * @Date: 2019-10-12 15:31:58
  * @LastEditors: yangdan
- * @LastEditTime: 2019-10-14 12:27:46
+ * @LastEditTime: 2019-10-16 16:27:13
  * @Description: 添加描述
  -->
 <template>
@@ -66,7 +66,6 @@
         end-placeholder="结束日期"
         align="right"
       ></el-date-picker>
-
     </el-form-item>
     <div class="searchBtn">
       <el-button-group>
@@ -118,8 +117,8 @@ export default {
 };
 </script>
 
-<style scoped>
-.el-select-dropdown__wrap {
-  margin-bottom: -16px !important;
+<style lang="scss" scoped>
+.searchBtn {
+  float: right;
 }
 </style>

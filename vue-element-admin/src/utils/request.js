@@ -1,3 +1,10 @@
+/*
+ * @Author: yangdan
+ * @Date: 2019-09-19 18:20:19
+ * @LastEditors: yangdan
+ * @LastEditTime: 2019-10-19 11:34:35
+ * @Description: 添加描述
+ */
 import axios from 'axios'
 import { MessageBox, Message } from 'element-ui'
 import store from '@/store'
@@ -44,6 +51,7 @@ service.interceptors.response.use(
    */
   response => {
     const res = response.data
+    console.log('res', res)
 
     // if the custom code is not 20000, it is judged as an error.
     if (res.code !== 20000) {
