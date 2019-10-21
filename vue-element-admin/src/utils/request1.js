@@ -5,16 +5,16 @@
  * @LastEditTime: 2019-10-12 11:20:28
  * @Description: 添加描述
  */
-import axios from "axios";
-import NodeRSA from "node-rsa";
-let Base64 = require("js-base64").Base64;
-var CryptoJS = require("crypto-js");
-axios.defaults.headers.get["Content-Type"] = "application/json; charset=utf-8";
-axios.defaults.headers.post["Content-Type"] = "application/json; charset=utf-8";
+import axios from 'axios';
+import NodeRSA from 'node-rsa';
+const Base64 = require('js-base64').Base64;
+var CryptoJS = require('crypto-js');
+axios.defaults.headers.get['Content-Type'] = 'application/json; charset=utf-8';
+axios.defaults.headers.post['Content-Type'] = 'application/json; charset=utf-8';
 axios.defaults.withCredentials = false;
 
 var FantuAxios = axios.create({
-  // baseURL: "https://test.fantudl.com/fantulogistics"
+  baseURL: 'https://test.fantudl.com/fantulogistics'
 });
 // 请求开始
 FantuAxios.interceptors.request.use(
@@ -31,9 +31,8 @@ FantuAxios.interceptors.request.use(
 FantuAxios.interceptors.response.use(
   function(response) {
     // 对响应数据做点什么
-    console.log('response', response)
+    console.log('response', response);
     return response;
-
   },
   function(error) {
     // 对响应错误做点什么
@@ -45,17 +44,17 @@ FantuAxios.interceptors.response.use(
 const encryptmodel = 0;
 
 const appID = 1;
-const aseKey = "0DF0236A1827E181";
+const aseKey = '0DF0236A1827E181';
 const rsaKeyPublic =
-  "-----BEGIN PUBLIC KEY-----\n" +
-  "MIGfMA0GCSqGSIb3DQEBAQUAA4GNADCBiQKBgQDAqSPVc2s42kcMS8Tc5uwoaYeK\n" +
-  "AtSn1I1uHznC9Y1oqLsgkhMDFawqopAvyMArufCSWmrLxhxi/8q5I/XqYBML2WDg\n" +
-  "S1cr4SF98Soe9hjIqES4iTVROWgF+ptv3J2aWvIFQvfWGmJkx2tygeAKCizacMiN\n" +
-  "dse70XA1ZoPjlO1xoQIDAQAB\n" +
-  "-----END PUBLIC KEY-----";
+  '-----BEGIN PUBLIC KEY-----\n' +
+  'MIGfMA0GCSqGSIb3DQEBAQUAA4GNADCBiQKBgQDAqSPVc2s42kcMS8Tc5uwoaYeK\n' +
+  'AtSn1I1uHznC9Y1oqLsgkhMDFawqopAvyMArufCSWmrLxhxi/8q5I/XqYBML2WDg\n' +
+  'S1cr4SF98Soe9hjIqES4iTVROWgF+ptv3J2aWvIFQvfWGmJkx2tygeAKCizacMiN\n' +
+  'dse70XA1ZoPjlO1xoQIDAQAB\n' +
+  '-----END PUBLIC KEY-----';
 
-var rsaPublic = new NodeRSA(rsaKeyPublic, "pkcs8-public-pem");
-rsaPublic.setOptions({ encryptionScheme: "pkcs1" });
+var rsaPublic = new NodeRSA(rsaKeyPublic, 'pkcs8-public-pem');
+rsaPublic.setOptions({ encryptionScheme: 'pkcs1' });
 
 function FantuMD5(data) {
   return String(CryptoJS.MD5(data, { asString: true }));
@@ -86,7 +85,7 @@ function AesDecrypt(dataEncrypted, iv) {
 }
 
 function RsaEncrypt(data) {
-  return rsaPublic.encrypt(data, "base64");
+  return rsaPublic.encrypt(data, 'base64');
 }
 
 async function NetPost(url, data, method) {
@@ -96,7 +95,7 @@ async function NetPost(url, data, method) {
   jsonObject.key = RsaEncrypt(iv);
   jsonObject.timeStamp = Date.parse(new Date());
   //  如果method存在就是method否则就是''
-  method ? method : "";
+  method || '';
   jsonObject.method = method;
 
   if (encryptmodel === 1) {
@@ -105,7 +104,7 @@ async function NetPost(url, data, method) {
     jsonObject.param = data;
   }
   jsonObject.sign = FantuMD5(
-    jsonObject.appID + "&" + jsonObject.timeStamp + "&" + data
+    jsonObject.appID + '&' + jsonObject.timeStamp + '&' + data
   );
 
   var jsonData = JSON.stringify(jsonObject);
@@ -119,8 +118,7 @@ async function NetPost(url, data, method) {
     });
 
   if (postRes !== null) {
-
-    var deCryptedData =JSON.stringify(postRes);
+    var deCryptedData = JSON.stringify(postRes);
     var jsonResObject = JSON.parse(deCryptedData);
     var jsonRes = jsonResObject.res;
     jsonRes = JSON.parse(jsonRes);

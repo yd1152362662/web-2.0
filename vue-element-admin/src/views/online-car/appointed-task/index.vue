@@ -12,9 +12,9 @@
         <el-cascader
           clearable
           :options="options2"
-          @active-item-change="handleItemChange"
           :props="props"
-        ></el-cascader>
+          @active-item-change="handleItemChange"
+        />
       </div>
     </div>
   </div>
@@ -22,57 +22,57 @@
 
 <script>
 export default {
-  name: "",
+  name: '',
   components: {},
   data() {
     return {
       options2: [
         {
-          label: "江苏",
-          value: "1007",
+          label: '江苏',
+          value: '1007',
           children: []
         },
         {
-          label: "浙江",
-          value: "1008",
+          label: '浙江',
+          value: '1008',
           children: []
         }
       ],
       props: {
-        value: "value",
-        children: "children"
+        value: 'value',
+        children: 'children'
       }
     };
   },
   watch: {},
   created() {},
   mounted() {
-    // this.$store
-    //   .dispatch("test/testAddress", {parentCode:-1})
-    //   .then((res) => {
-    //      console.log('res-succes', res)
-    //   })
-    //   .catch((res) => {
-    //      console.log('fail-succes', res)
-    //   });
+    this.$store
+      .dispatch('test/testAddress', { parentCode: -1 })
+      .then((res) => {
+        console.log('res-succes', res);
+      })
+      .catch((res) => {
+        console.log('fail-succes', res);
+      });
   },
   methods: {
     handleItemChange(val) {
-      console.log("active item:", val);
+      console.log('active item:', val);
       setTimeout(_ => {
-        if (val.indexOf("1007") > -1 && !this.options2[0].children.length) {
+        if (val.indexOf('1007') > -1 && !this.options2[0].children.length) {
           this.options2[0].children = [
             {
-              label: "南京"
+              label: '南京'
             }
           ];
         } else if (
-          val.indexOf("1008") > -1 &&
+          val.indexOf('1008') > -1 &&
           !this.options2[1].children.length
         ) {
           this.options2[1].children = [
             {
-              label: "杭州"
+              label: '杭州'
             }
           ];
         }

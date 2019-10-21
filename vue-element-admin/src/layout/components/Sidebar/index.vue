@@ -21,7 +21,7 @@
         class="active-bg-color"
       >
         <sidebar-item
-          v-for="route in permission_routes"
+          v-for="route in constantRoutes"
           :key="route.path"
           :item="route"
           :base-path="route.path"
@@ -32,15 +32,25 @@
 </template>
 
 <script>
-import { mapGetters } from "vuex";
-import Logo from "./Logo";
-import SidebarItem from "./SidebarItem";
-import variables from "@/styles/variables.scss";
+import { mapGetters } from 'vuex';
+import Logo from './Logo';
+import SidebarItem from './SidebarItem';
+import variables from '@/styles/variables.scss';
+import { asyncRoutes, constantRoutes } from '@/router';
 
 export default {
   components: { SidebarItem, Logo },
+  data() {
+    return {
+      constantRoutes: []
+    };
+  },
+  mounted() {
+    this.constantRoutes = constantRoutes;
+    console.log('this.$router', constantRoutes);
+  },
   computed: {
-    ...mapGetters(["permission_routes", "sidebar"]),
+    ...mapGetters(['sidebar']),
     activeMenu() {
       const route = this.$route;
       const { meta, path } = route;

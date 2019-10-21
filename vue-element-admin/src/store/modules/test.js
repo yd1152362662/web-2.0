@@ -5,17 +5,17 @@
  * @LastEditTime: 2019-10-19 10:55:16
  * @Description: 添加描述
  */
-import { testAddress } from "@/api/test";
+import { testAddress } from '@/api/test';
 
-import router, { resetRouter } from "@/router";
+import router, { resetRouter } from '@/router';
 
 const state = {};
 
 const mutations = {};
 
 const actions = {
-  //获取详情地址
   testAddress({ commit }, { parentCode }) {
+    console.log('parentCode', parentCode);
     return new Promise((resolve, reject) => {
       testAddress({ parentCode }).then(res => {
         resolve(res);
