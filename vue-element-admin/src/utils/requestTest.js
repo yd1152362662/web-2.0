@@ -6,12 +6,13 @@
  * @Description: 添加描述
  */
 import axios from 'axios';
-import { MessageBox, Message } from 'element-ui';
-import store from '@/store';
+import {
+  Message
+} from 'element-ui';
 
 axios.defaults.headers.get['Content-Type'] = 'application/json;charset=UTF-8';
 axios.defaults.headers.post['Content-Type'] = 'application/json;charset=UTF-8';
-
+console.log('process.env.VUE_APP_BASE_API', process.env.VUE_APP_BASE_API);
 // create an axios instance
 const service = axios.create({
   baseURL: process.env.VUE_APP_BASE_API, // url = base url + request url
@@ -38,7 +39,7 @@ service.interceptors.response.use(
   /**
    * If you want to get http information such as headers or status
    * Please return  response => response
-  */
+   */
 
   /**
    * Determine the request status by custom code

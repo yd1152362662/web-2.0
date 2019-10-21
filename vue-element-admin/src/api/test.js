@@ -12,7 +12,7 @@ export function testAddress(data) {
   return request({
     url: '/api/area/queryChildren',
     method: 'post',
-    baseURL: 'https://appletpromotion.fantudl.com',
+    // baseURL: 'https://appletpromotion.fantudl.com',
     data
   });
 }
