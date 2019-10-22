@@ -2,7 +2,7 @@
  * @Author: yangdan
  * @Date: 2019-09-19 18:20:19
  * @LastEditors: yangdan
- * @LastEditTime: 2019-09-24 11:32:10
+ * @LastEditTime: 2019-10-22 14:14:59
  * @Description: 添加描述
  */
 import Vue from 'vue'
@@ -26,6 +26,8 @@ import './icons' // icon
 import './permission' // permission control
 import './utils/error-log' // error log
 import MountFun from './utils/mountFun';
+
+import _ from "lodash";
 
 import * as filters from './filters' // global filters
 

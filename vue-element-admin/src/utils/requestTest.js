@@ -2,17 +2,15 @@
  * @Author: yangdan
  * @Date: 2019-09-19 18:20:19
  * @LastEditors: yangdan
- * @LastEditTime: 2019-10-19 11:34:35
+ * @LastEditTime: 2019-10-22 11:30:36
  * @Description: 添加描述
  */
-import axios from 'axios';
-import {
-  Message
-} from 'element-ui';
+import axios from "axios";
+import { Message } from "element-ui";
 
-axios.defaults.headers.get['Content-Type'] = 'application/json;charset=UTF-8';
-axios.defaults.headers.post['Content-Type'] = 'application/json;charset=UTF-8';
-console.log('process.env.VUE_APP_BASE_API', process.env.VUE_APP_BASE_API);
+// axios.defaults.headers.get['Content-Type'] = 'application/json;charset=UTF-8';
+// axios.defaults.headers.post['Content-Type'] = 'application/json;charset=UTF-8';
+console.log("process.env.VUE_APP_BASE_API", process.env.VUE_APP_BASE_API);
 // create an axios instance
 const service = axios.create({
   baseURL: process.env.VUE_APP_BASE_API, // url = base url + request url
@@ -48,26 +46,30 @@ service.interceptors.response.use(
    */
   response => {
     const res = response.data;
-    console.log('res', res);
+    console.log("resTEST", res);
 
     // if the custom code is not 20000, it is judged as an error.
-    if (res.code !== 200) {
+    // if (res.code !== 200) {
+    if (!res) {
       Message({
-        message: res.message || 'Error',
-        type: 'error',
+        message: res.message || "Error",
+        type: "error",
         duration: 5 * 1000
       });
 
-      return Promise.reject(new Error(res.message || 'Error'));
+      return Promise.reject(new Error(res.message || "Error"));
     } else {
       return res;
     }
+    // } else {
+    //
+    // }
   },
   error => {
-    console.log('err' + error); // for debug
+    console.log("err" + error); // for debug
     Message({
       message: error.message,
-      type: 'error',
+      type: "error",
       duration: 5 * 1000
     });
     return Promise.reject(error);

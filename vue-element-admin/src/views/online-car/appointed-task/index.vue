@@ -2,7 +2,7 @@
  * @Author: yangdan
  * @Date: 2019-09-19 18:20:19
  * @LastEditors: yangdan
- * @LastEditTime: 2019-10-19 11:49:57
+ * @LastEditTime: 2019-10-22 17:41:39
  * @Description: 添加描述
  -->
 <template>
@@ -11,9 +11,13 @@
       <div class="basic-border">
         <el-cascader
           clearable
-          :options="options2"
+          :options="area"
           :props="props"
+          :visible-change="false"
+          v-model="selectedRegion"
+          change-on-select
           @active-item-change="handleItemChange"
+          style="width:20%"
         />
       </div>
     </div>
@@ -22,61 +26,106 @@
 
 <script>
 export default {
-  name: '',
+  name: "",
   components: {},
   data() {
     return {
-      options2: [
-        {
-          label: '江苏',
-          value: '1007',
-          children: []
-        },
-        {
-          label: '浙江',
-          value: '1008',
-          children: []
-        }
-      ],
+      area: [],
       props: {
-        value: 'value',
-        children: 'children'
-      }
+        value: "value",
+        children: "children"
+      },
+      selectedRegion: [],
+      res: true
     };
   },
-  watch: {},
+  watch: {
+    selectedRegion(nv) {
+      console.log("选择了", nv);
+      this.loadRegionChild(nv);
+    }
+  },
   created() {},
   mounted() {
     this.$store
-      .dispatch('test/testAddress', { parentCode: -1 })
-      .then((res) => {
-        console.log('res-succes', res);
+      .dispatch("test/testAddress", { parentCode: -1 })
+      .then(res => {
+        const areaArray = res.map(item => {
+          return {
+            label: item.name,
+            value: item.code,
+            children: []
+          };
+        });
+        this.area = areaArray;
       })
-      .catch((res) => {
-        console.log('fail-succes', res);
+      .catch(res => {
+        console.log("fail-succes", res);
       });
   },
   methods: {
     handleItemChange(val) {
-      console.log('active item:', val);
-      setTimeout(_ => {
-        if (val.indexOf('1007') > -1 && !this.options2[0].children.length) {
-          this.options2[0].children = [
-            {
-              label: '南京'
-            }
-          ];
-        } else if (
-          val.indexOf('1008') > -1 &&
-          !this.options2[1].children.length
-        ) {
-          this.options2[1].children = [
-            {
-              label: '杭州'
-            }
-          ];
-        }
-      }, 300);
+      console.log("active item:", val);
+      this.selectedRegion = val;
+    },
+
+    findRegionOption(regionOptions, regionArr) {
+      if (_.isEmpty(regionArr) || _.isEmpty(regionOptions)) {
+        return null;
+      }
+
+      let regionId = _.first(regionArr);
+      let regionOption = _.find(regionOptions, regionOption => {
+        return regionOption.value === regionId;
+      });
+      if (!regionOption) {
+        return null;
+      }
+      let tailRegionArr = _.tail(regionArr);
+      if (_.isEmpty(tailRegionArr)) {
+        return regionOption;
+      }
+      return this.findRegionOption(regionOption.children, tailRegionArr);
+    },
+
+    loadRegionChild(regionIdArr) {
+      let regionOptions = this.area;
+      let regionOptionInUI = this.findRegionOption(regionOptions, regionIdArr);
+      if (
+        !regionOptionInUI ||
+        !regionOptionInUI.children ||
+        regionOptionInUI.children.length > 0
+      ) {
+        return null;
+      }
+
+      let regionKey = _.last(regionIdArr);
+      if (!regionKey) {
+        return null;
+      }
+
+      // 拿数据
+      this.$store
+        .dispatch("test/testAddress", { parentCode: regionKey })
+        .then(res => {
+          if (res.length !== 0) {
+            const areaArray = res.map(item => {
+              return {
+                label: item.name,
+                value: item.code,
+                children: []
+              };
+            });
+            regionOptionInUI["children"] = areaArray;
+          }
+          else {
+            console.log('无数据')
+
+          }
+        })
+        .catch(res => {
+          console.log("fail-succes", res);
+        });
     }
   }
 };

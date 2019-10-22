@@ -2,7 +2,7 @@
  * @Author: yangdan
  * @Date: 2019-09-19 18:18:51
  * @LastEditors: yangdan
- * @LastEditTime: 2019-10-19 11:49:29
+ * @LastEditTime: 2019-10-22 10:33:03
  * @Description: 添加描述
  */
 'use strict'
@@ -43,14 +43,15 @@ module.exports = {
     proxy: {
       // change xxx-api/login => mock/login
       // detail: https://cli.vuejs.org/config/#devserver-proxy
+
       [process.env.VUE_APP_BASE_API]: {
         // target: `http://127.0.0.1:${port}/mock`,
-        target: `https://jsonplaceholder.typicode.com`,
-        source: true,
+        target: `https://appletpromotion.fantudl.com`,
+        // source: true,
         changeOrigin: true,
-        pathRewrite: {
-          ['^' + process.env.VUE_APP_BASE_API]: 'https://jsonplaceholder.typicode.com'
-        }
+        // pathRewrite: {
+        //   ['^' + process.env.VUE_APP_BASE_API]: 'https://jsonplaceholder.typicode.com/api/'
+        // }
       }
     },
     // after: require('./mock/mock-server.js')
