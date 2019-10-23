@@ -2,7 +2,7 @@
  * @Author: yangdan
  * @Date: 2019-09-19 18:20:19
  * @LastEditors: yangdan
- * @LastEditTime: 2019-10-14 14:20:26
+ * @LastEditTime: 2019-10-23 14:17:35
  * @Description: 添加描述
  */
 import { login, logout, getInfo } from "@/api/user";
@@ -14,7 +14,8 @@ const state = {
   name: "",
   avatar: "",
   introduction: "",
-  roles: []
+  roles: [],
+  erpShow:false
 };
 
 const mutations = {
@@ -32,7 +33,10 @@ const mutations = {
   },
   SET_ROLES: (state, roles) => {
     state.roles = roles;
-  }
+  },
+  SET_erpShow: (state, erpShow) => {
+    state.erpShow = erpShow;
+  },
 };
 
 const actions = {
@@ -45,9 +49,9 @@ const actions = {
         login({ phone: phone, verificationCode: verificationCode })
           .then(response => {
             const { data } = response;
-            commit("SET_TOKEN", data.token);
-            setToken(data.token);
-            resolve();
+            // commit("SET_TOKEN", data.token);
+            // setToken(data.token);
+            resolve(response);
           })
           .catch(error => {
             reject(error);

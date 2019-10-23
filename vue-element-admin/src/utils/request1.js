@@ -2,7 +2,7 @@
  * @Author: yangdan
  * @Date: 2019-09-24 10:35:10
  * @LastEditors: yangdan
- * @LastEditTime: 2019-10-12 11:20:28
+ * @LastEditTime: 2019-10-23 12:47:11
  * @Description: 添加描述
  */
 import axios from 'axios';
@@ -31,7 +31,7 @@ FantuAxios.interceptors.request.use(
 FantuAxios.interceptors.response.use(
   function(response) {
     // 对响应数据做点什么
-    console.log('response', response);
+    console.log('response1', response);
     return response;
   },
   function(error) {

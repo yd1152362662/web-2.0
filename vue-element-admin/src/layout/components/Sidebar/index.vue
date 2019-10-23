@@ -2,7 +2,7 @@
  * @Author: yangdan
  * @Date: 2019-09-19 18:20:19
  * @LastEditors: yangdan
- * @LastEditTime: 2019-10-12 14:48:00
+ * @LastEditTime: 2019-10-23 18:41:29
  * @Description: 添加描述
  -->
 <template>
@@ -32,11 +32,12 @@
 </template>
 
 <script>
-import { mapGetters } from 'vuex';
-import Logo from './Logo';
-import SidebarItem from './SidebarItem';
-import variables from '@/styles/variables.scss';
-import { asyncRoutes, constantRoutes } from '@/router';
+import { mapGetters } from "vuex";
+import Logo from "./Logo";
+import SidebarItem from "./SidebarItem";
+import variables from "@/styles/variables.scss";
+import { asyncRoutes, constantRoutes, constantRoutes1 } from "@/router";
+import ansRouter from "../../../router/modules/charts";
 
 export default {
   components: { SidebarItem, Logo },
@@ -46,11 +47,20 @@ export default {
     };
   },
   mounted() {
-    this.constantRoutes = constantRoutes;
-    console.log('this.$router', constantRoutes);
+    let mark = localStorage.getItem("mark");
+    let routes = this.$root._router.options.routes
+    console.log(this.$root._router.options.routes)
+    this.$root._router.options.routes.splice(8,1)
+    console.log(this.$root._router.options.routes)
+    // this.$root._router.options.routes
+    if (parseInt(mark) === 1) {
+      this.constantRoutes = constantRoutes;
+    } else {
+      this.constantRoutes = constantRoutes1;
+    }
   },
   computed: {
-    ...mapGetters(['sidebar']),
+    ...mapGetters(["permission_routes", "sidebar"]),
     activeMenu() {
       const route = this.$route;
       const { meta, path } = route;
@@ -78,5 +88,4 @@ export default {
   background-color: #e0f0ff !important;
   border-left: 4px solid #2aa3f6 !important;
 }
-
 </style>

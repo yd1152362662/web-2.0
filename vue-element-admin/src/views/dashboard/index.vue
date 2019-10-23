@@ -2,7 +2,7 @@
  * @Author: yangdan
  * @Date: 2019-09-19 18:20:19
  * @LastEditors: yangdan
- * @LastEditTime: 2019-09-19 18:20:19
+ * @LastEditTime: 2019-10-23 15:44:55
  * @Description: 添加描述
  -->
 <template>
@@ -12,14 +12,18 @@
 </template>
 
 <script>
-import adminDashboard from './home';
+import adminDashboard from "./home";
+
+
 
 export default {
-  name: 'Dashboard',
+  name: "Dashboard",
   components: { adminDashboard },
-  computed: {
-  },
+  computed: {},
   created() {
+
+  },
+  mounted() {
   }
 };
 </script>

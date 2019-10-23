@@ -2,16 +2,23 @@
  * @Author: yangdan
  * @Date: 2019-09-19 18:20:19
  * @LastEditors: yangdan
- * @LastEditTime: 2019-10-19 10:55:16
+ * @LastEditTime: 2019-10-23 17:13:06
  * @Description: 添加描述
  */
 import { testAddress } from '@/api/test';
+import { asyncRoutes, constantRoutes } from '@/router'
 
-import router, { resetRouter } from '@/router';
+const state = {
+    routes: [],
+    addRoutes: []
+};
 
-const state = {};
-
-const mutations = {};
+const mutations = {
+  SET_ROUTES: (state, routes) => {
+    state.addRoutes = routes
+    state.routes = constantRoutes.concat(routes)
+  }
+};
 
 const actions = {
   testAddress({ commit }, { parentCode }) {
@@ -21,6 +28,10 @@ const actions = {
         resolve(res);
       });
     });
+  },
+  generateRoutestest({ commit }) {
+      let accessedRoutes = asyncRoutes
+      commit('SET_ROUTES', accessedRoutes)
   }
 };
 

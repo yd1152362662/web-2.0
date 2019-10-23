@@ -1,36 +1,29 @@
+/*
+ * @Author: yangdan
+ * @Date: 2019-09-19 18:20:19
+ * @LastEditors: yangdan
+ * @LastEditTime: 2019-10-23 16:42:12
+ * @Description: 添加描述
+ */
 /** When your routing table is too long, you can split it into small modules**/
 
-import Layout from '@/layout'
+// import Layout from "@/layout";
+// console.log('Layout',Layout)
 
-const chartsRouter = {
-  path: '/charts',
-  component: Layout,
-  redirect: 'noRedirect',
-  name: 'Charts',
-  meta: {
-    title: 'Charts',
-    icon: 'chart'
+const chartsRouter = [
+  {
+    path: "/tabone",
+    component: () => import("@/layout"),
+    hidden: true,
+    name: "Tabone",
+    children: [
+      {
+        path: "index",
+        component: () => import("@/views/tab/index"),
+        name: "Tabone",
+        meta: { title: "表格1", icon: "tab" }
+      }
+    ]
   },
-  children: [
-    {
-      path: 'keyboard',
-      component: () => import('@/views/charts/keyboard'),
-      name: 'KeyboardChart',
-      meta: { title: 'Keyboard Chart', noCache: true }
-    },
-    {
-      path: 'line',
-      component: () => import('@/views/charts/line'),
-      name: 'LineChart',
-      meta: { title: 'Line Chart', noCache: true }
-    },
-    {
-      path: 'mix-chart',
-      component: () => import('@/views/charts/mix-chart'),
-      name: 'MixChart',
-      meta: { title: 'Mix Chart', noCache: true }
-    }
-  ]
-}
-
-export default chartsRouter
+];
+export default chartsRouter;

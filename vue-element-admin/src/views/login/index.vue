@@ -3,7 +3,7 @@
  * @Author: yangdan
  * @Date: 2019-09-19 18:20:19
  * @LastEditors: yangdan
- * @LastEditTime: 2019-10-14 16:31:10
+ * @LastEditTime: 2019-10-23 18:08:51
  * @Description: 添加描述
  -->
 <template>
@@ -25,7 +25,7 @@
                   class="hidden-md-and-down"
                 >
                   <div class="logoBox">
-                    <img src="../../assets/login/zgjc.png" class="logoImg">
+                    <img src="../../assets/login/zgjc.png" class="logoImg" />
                     <p class="logoText">中国建材</p>
                   </div>
                 </el-col>
@@ -165,19 +165,20 @@
 <script>
 // import { validUsername } from "@/utils/validate";
 
+
 export default {
-  name: 'Login',
+  name: "Login",
   data() {
     const validateUsername = (rule, value, callback) => {
       if (!value) {
-        callback(new Error('请输入用户名'));
+        callback(new Error("请输入用户名"));
       } else {
         callback();
       }
     };
     const validatePassword = (rule, value, callback) => {
       if (value.length < 6) {
-        callback(new Error('密码的长度为6位'));
+        callback(new Error("密码的长度为6位"));
       } else {
         callback();
       }
@@ -185,7 +186,7 @@ export default {
 
     const validatePhone = (rule, value, callback) => {
       if (value.length != 11) {
-        callback(new Error('手机号的长度为11位'));
+        callback(new Error("手机号的长度为11位"));
       } else {
         callback();
       }
@@ -193,7 +194,7 @@ export default {
 
     const validateVerificationCode = (rule, value, callback) => {
       if (value.length < 6) {
-        callback(new Error('验证码的长度为6位'));
+        callback(new Error("验证码的长度为6位"));
       } else {
         callback();
       }
@@ -201,29 +202,29 @@ export default {
 
     return {
       loginForm: {
-        username: '',
-        password: '',
-        phone: '',
-        verificationCode: '',
-        type: '1'
+        username: "",
+        password: "",
+        phone: "",
+        verificationCode: "",
+        type: "1"
       },
       loginRules: {
         username: [
-          { required: true, trigger: 'blur', validator: validateUsername }
+          { required: true, trigger: "blur", validator: validateUsername }
         ],
         password: [
-          { required: true, trigger: 'blur', validator: validatePassword }
+          { required: true, trigger: "blur", validator: validatePassword }
         ],
-        phone: [{ required: true, trigger: 'blur', validator: validatePhone }],
+        phone: [{ required: true, trigger: "blur", validator: validatePhone }],
         verificationCode: [
           {
             required: true,
-            trigger: 'blur',
+            trigger: "blur",
             validator: validateVerificationCode
           }
         ]
       },
-      passwordType: 'password',
+      passwordType: "password",
       loading: false,
       redirect: undefined,
       otherQuery: {}
@@ -233,10 +234,10 @@ export default {
     $route: {
       handler: function(route) {
         const query = route.query;
-        console.log('query', query);
+        console.log("query", query);
         if (query) {
-          this.redirect = '';
-          this.otherQuery = '';
+          this.redirect = "";
+          this.otherQuery = "";
         }
       },
       immediate: true
@@ -246,50 +247,79 @@ export default {
     // window.addEventListener('storage', this.afterQRScan)
   },
   mounted() {
-    if (this.loginForm.username === '') {
+    if (this.loginForm.username === "") {
       this.$refs.username.focus();
-    } else if (this.loginForm.password === '') {
+    } else if (this.loginForm.password === "") {
       this.$refs.password.focus();
     }
     const loginData = {
-      phoneNum: '14786123077',
+      phoneNum: "14786123077",
       loginType: 1,
-      verifyContent: '132465'
+      verifyContent: "132465"
     };
-    this.$Net.NetPost('/login', loginData, 'userLogin').then(result => {
-      console.log(result);
-      if (result.resType === 0) {
+
+    // this.$store
+    //   .dispatch("user/login", this.loginForm)
+    //   .then(() => {
+    //     this.$router.push({
+    //       path: this.redirect || "/"
+    //     });
+    //     this.loading = false;
+    //   })
+    //   .catch(() => {
+    //     this.loading = false;
+    //   });
+
+    // this.$Net.NetPost('/login', loginData, 'userLogin').then(result => {
+    //   console.log(result);
+    //   if (result.resType === 0) {
+    //     // this.$router.push({
+    //     //   path: this.redirect || "/",
+    //     //   query: this.otherQuery
+    //     // });
+    //     this.loading = false;
+    //   }
+    // });
+
+    this.$store
+      .dispatch("user/login", this.loginForm)
+      .then((res) => {
+        console.log('reslogin', res)
         // this.$router.push({
-        //   path: this.redirect || "/",
-        //   query: this.otherQuery
+        //   path: this.redirect || "/"
         // });
+
         this.loading = false;
-      }
-    });
+      })
+      .catch(() => {
+        this.loading = false;
+      });
   },
   destroyed() {
     // window.removeEventListener('storage', this.afterQRScan)
   },
   methods: {
     showPwd() {
-      if (this.passwordType === 'password') {
-        this.passwordType = '';
+      if (this.passwordType === "password") {
+        this.passwordType = "";
       } else {
-        this.passwordType = 'password';
+        this.passwordType = "password";
       }
       this.$nextTick(() => {
         this.$refs.password.focus();
       });
     },
     handleLogin() {
-      console.log('this.form', this.loginForm);
+      console.log("this.form", this.loginForm);
       if (parseInt(this.loginForm.type) === 1) {
         this.$refs.loginFormPhone.validate(valid => {
-          console.log('valid', valid);
+          console.log("valid", valid);
           if (valid) {
             this.$router.push({
-              path: this.redirect || '/'
+              path: this.redirect || "/"
             });
+
+            localStorage.setItem("mark", "1");
             this.loading = false;
           }
           // if (valid) {
@@ -312,10 +342,11 @@ export default {
         });
       } else {
         this.$refs.loginFormPassword.validate(valid => {
-          console.log('valid', valid);
+          console.log("valid", valid);
           if (valid) {
+            localStorage.setItem("mark", "2");
             this.$router.push({
-              path: this.redirect || '/'
+              path: this.redirect || "/"
             });
             this.loading = false;
           }
@@ -324,7 +355,7 @@ export default {
     },
     handleClick(tab, event) {
       this.loginForm.type = tab.name;
-      console.log('tab', tab.name);
+      console.log("tab", tab.name);
     }
   }
 };
