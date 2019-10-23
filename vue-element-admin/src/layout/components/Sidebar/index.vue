@@ -32,35 +32,24 @@
 </template>
 
 <script>
-import { mapGetters } from "vuex";
-import Logo from "./Logo";
-import SidebarItem from "./SidebarItem";
-import variables from "@/styles/variables.scss";
-import { asyncRoutes, constantRoutes, constantRoutes1 } from "@/router";
-import ansRouter from "../../../router/modules/charts";
+import { mapGetters } from 'vuex';
+import Logo from './Logo';
+import SidebarItem from './SidebarItem';
+import variables from '@/styles/variables.scss';
+import { asyncRoutes, constantRoutes1 } from '@/router';
 
 export default {
   components: { SidebarItem, Logo },
   data() {
     return {
-      constantRoutes: []
+      constantRoutes: [],
+      mark: localStorage.getItem('mark'),
+      time: true
     };
   },
-  mounted() {
-    let mark = localStorage.getItem("mark");
-    let routes = this.$root._router.options.routes
-    console.log(this.$root._router.options.routes)
-    this.$root._router.options.routes.splice(8,1)
-    console.log(this.$root._router.options.routes)
-    // this.$root._router.options.routes
-    if (parseInt(mark) === 1) {
-      this.constantRoutes = constantRoutes;
-    } else {
-      this.constantRoutes = constantRoutes1;
-    }
-  },
+
   computed: {
-    ...mapGetters(["permission_routes", "sidebar"]),
+    ...mapGetters(['sidebar']),
     activeMenu() {
       const route = this.$route;
       const { meta, path } = route;
@@ -78,6 +67,45 @@ export default {
     },
     isCollapse() {
       return !this.sidebar.opened;
+    }
+  },
+  watch: {
+    mark(newValue, oldValue) {
+      console.log('newValue', newValue);
+    }
+  },
+
+  mounted() {
+    if (parseInt(this.mark) === 1) {
+      const arr = constantRoutes1;
+      arr.forEach(item => {
+        const res = this.$router.options.routes.find(
+          arrItem => arrItem.path === item.path
+        );
+        if (!res) {
+          this.$router.options.routes.push(item);
+        }
+      });
+      this.$router.addRoutes(this.$router.options.routes);
+      this.constantRoutes = this.$router.options.routes;
+    } else {
+      const arr = asyncRoutes;
+      arr.forEach(item => {
+        const res2 = this.$router.options.routes.find(
+          arrItem => arrItem.path === item.path
+        );
+        if (!res2) {
+          this.$router.options.routes.push(item);
+        }
+      });
+      this.$router.addRoutes(this.$router.options.routes);
+      this.constantRoutes = this.$router.options.routes;
+    }
+  },
+
+  methods: {
+    refresh() {
+      this.reload();
     }
   }
 };

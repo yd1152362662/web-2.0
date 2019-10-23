@@ -14,7 +14,7 @@
       @toggleClick="toggleSideBar"
     />
 
-    <breadcrumb id="breadcrumb-container" class="breadcrumb-container" v-if="device!=='mobile'" />
+    <breadcrumb v-if="device!=='mobile'" id="breadcrumb-container" class="breadcrumb-container" />
 
     <div class="right-menu">
       <template v-if="device!=='mobile'">
@@ -34,7 +34,7 @@
           <img
             src="http://img.mp.itc.cn/upload/20170716/5138ec2c641f4eb7bbb2d9c6e5ae4bd2_th.jpg"
             class="user-avatar"
-          />
+          >
           <span>西南水泥</span>
           <i class="el-icon-caret-bottom" />
         </div>
@@ -61,13 +61,13 @@
 </template>
 
 <script>
-import { mapGetters } from "vuex";
-import Breadcrumb from "@/components/Breadcrumb";
-import Hamburger from "@/components/Hamburger";
-import ErrorLog from "@/components/ErrorLog";
-import Screenfull from "@/components/Screenfull";
-import SizeSelect from "@/components/SizeSelect";
-import Search from "@/components/HeaderSearch";
+import { mapGetters } from 'vuex';
+import Breadcrumb from '@/components/Breadcrumb';
+import Hamburger from '@/components/Hamburger';
+import ErrorLog from '@/components/ErrorLog';
+import Screenfull from '@/components/Screenfull';
+import SizeSelect from '@/components/SizeSelect';
+// import Search from '@/components/HeaderSearch';
 
 export default {
   components: {
@@ -75,23 +75,26 @@ export default {
     Hamburger,
     ErrorLog,
     Screenfull,
-    SizeSelect,
-    Search
+    SizeSelect
+    // Search
   },
   computed: {
-    ...mapGetters(["sidebar", "avatar", "device", "isDot"])
+    ...mapGetters(['sidebar', 'avatar', 'device', 'isDot'])
   },
   methods: {
     toggleSideBar() {
-      this.$store.dispatch("app/toggleSideBar");
+      this.$store.dispatch('app/toggleSideBar');
     },
     async logout() {
-      await this.$store.dispatch("user/logout");
+      // await this.$store.dispatch("user/logout");
+
       this.$router.push(`/login?redirect=${this.$route.fullPath}`);
+      // localStorage.removeItem("mark");
+      localStorage.setItem('mark', '-1');
     },
     toggleisDot() {
-      console.log('object')
-      this.$store.dispatch("app/setDot");
+      console.log('object');
+      this.$store.dispatch('app/setDot');
     }
   }
 };
