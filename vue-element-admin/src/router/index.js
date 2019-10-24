@@ -2,7 +2,7 @@
  * @Author: yangdan
  * @Date: 2019-09-19 18:20:19
  * @LastEditors: yangdan
- * @LastEditTime: 2019-10-23 18:18:42
+ * @LastEditTime: 2019-10-24 12:33:38
  * @Description: 添加描述
  */
 import Vue from 'vue';
@@ -12,6 +12,7 @@ Vue.use(Router);
 
 /* Layout */
 import Layout from '@/layout';
+import { throwError } from 'rxjs';
 // console.log('Layout', Layout)
 
 /* Router Modules */
@@ -117,11 +118,12 @@ export const constantRoutes1 = [
       {
         path: 'index1',
         component: () => import('@/views/tab/index'),
-        name: 'Tab',
+        name: 'Tab1',
         meta: { title: '正常发单', icon: 'tab' }
       }
     ]
-  }
+  },
+  { path: '*', redirect: '/404', hidden: true }
 ];
 
 /**
@@ -180,8 +182,29 @@ export function resetRouter() {
 }
 
 router.$addRoutes = (params) => {
-  router.matcher = new Router({ mode: 'history' }).matcher;
-  router.addRoutes(params);
+
+  // console.log(routers,'jiaegi')
+  if(Array.isArray(params)) {
+    // params.forEach((item,i)=>{
+    //   let routers = router.options.routes
+    //   let itemChildren = item.children || {}
+    //   var findRes = routers.find(rItems=>{
+    //     let rItemsChildren = rItems.children || {}
+    //     return !(rItemsChildren.name===itemChildren.name||rItemsChildren.path===itemChildren.path)
+    //   })
+    //   if(!findRes) {
+    //     console.log(item)
+    //     router.matcher = new Router({routes:constantRoutes}).matcher;
+    //     router.options.routes = router.options.routes.concat([item])
+    //     router.addRoutes([item]);
+    //   }
+    // });
+    router.options.routes = router.options.routes.concat(params)
+    router.addRoutes(params);
+    console.log(router,'路由')
+  }else {
+    throw 'params is not a Array'
+  }
 };
 
 export default router;

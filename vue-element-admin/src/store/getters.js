@@ -2,7 +2,7 @@
  * @Author: yangdan
  * @Date: 2019-09-19 18:20:19
  * @LastEditors: yangdan
- * @LastEditTime: 2019-09-19 18:20:19
+ * @LastEditTime: 2019-10-24 16:09:42
  * @Description: 添加描述
  */
 const getters = {
@@ -19,6 +19,7 @@ const getters = {
   roles: state => state.user.roles,
   permission_routes: state => state.permission.routes,
   routesTest:state => state.test.routes,
-  errorLogs: state => state.errorLog.logs
+  errorLogs: state => state.errorLog.logs,
+  get_routes: state => state.getRouter.routes,
 }
 export default getters

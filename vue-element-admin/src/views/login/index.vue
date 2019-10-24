@@ -3,7 +3,7 @@
  * @Author: yangdan
  * @Date: 2019-09-19 18:20:19
  * @LastEditors: yangdan
- * @LastEditTime: 2019-10-23 18:08:51
+ * @LastEditTime: 2019-10-24 11:18:18
  * @Description: 添加描述
  -->
 <template>
@@ -167,7 +167,6 @@
 
 export default {
   name: 'Login',
-  inject: ['reload'],
   data() {
     const validateUsername = (rule, value, callback) => {
       if (!value) {

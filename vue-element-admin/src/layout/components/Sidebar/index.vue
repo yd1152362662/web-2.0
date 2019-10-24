@@ -2,7 +2,7 @@
  * @Author: yangdan
  * @Date: 2019-09-19 18:20:19
  * @LastEditors: yangdan
- * @LastEditTime: 2019-10-23 18:41:29
+ * @LastEditTime: 2019-10-24 17:22:24
  * @Description: 添加描述
  -->
 <template>
@@ -21,7 +21,7 @@
         class="active-bg-color"
       >
         <sidebar-item
-          v-for="route in constantRoutes"
+          v-for="route in get_routes"
           :key="route.path"
           :item="route"
           :base-path="route.path"
@@ -32,24 +32,24 @@
 </template>
 
 <script>
-import { mapGetters } from 'vuex';
-import Logo from './Logo';
-import SidebarItem from './SidebarItem';
-import variables from '@/styles/variables.scss';
-import { asyncRoutes, constantRoutes1 } from '@/router';
+import { mapGetters } from "vuex";
+import Logo from "./Logo";
+import SidebarItem from "./SidebarItem";
+import variables from "@/styles/variables.scss";
+import { asyncRoutes, constantRoutes1, constantRoutes } from "@/router";
 
 export default {
   components: { SidebarItem, Logo },
   data() {
     return {
       constantRoutes: [],
-      mark: localStorage.getItem('mark'),
+      mark: localStorage.getItem("mark"),
       time: true
     };
   },
 
   computed: {
-    ...mapGetters(['sidebar']),
+    ...mapGetters(["get_routes", "sidebar"]),
     activeMenu() {
       const route = this.$route;
       const { meta, path } = route;
@@ -69,44 +69,14 @@ export default {
       return !this.sidebar.opened;
     }
   },
-  watch: {
-    mark(newValue, oldValue) {
-      console.log('newValue', newValue);
-    }
-  },
 
   mounted() {
-    if (parseInt(this.mark) === 1) {
-      const arr = constantRoutes1;
-      arr.forEach(item => {
-        const res = this.$router.options.routes.find(
-          arrItem => arrItem.path === item.path
-        );
-        if (!res) {
-          this.$router.options.routes.push(item);
-        }
-      });
-      this.$router.addRoutes(this.$router.options.routes);
-      this.constantRoutes = this.$router.options.routes;
-    } else {
-      const arr = asyncRoutes;
-      arr.forEach(item => {
-        const res2 = this.$router.options.routes.find(
-          arrItem => arrItem.path === item.path
-        );
-        if (!res2) {
-          this.$router.options.routes.push(item);
-        }
-      });
-      this.$router.addRoutes(this.$router.options.routes);
-      this.constantRoutes = this.$router.options.routes;
-    }
+    this.$store.dispatch("getRouter/generateRoutes", this.mark);
   },
 
-  methods: {
-    refresh() {
-      this.reload();
-    }
+  methods: {},
+  destroyed() {
+    this.$store.dispatch("getRouter/destroyedRoutes", this.mark);
   }
 };
 </script>
