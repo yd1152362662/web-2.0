@@ -2,7 +2,7 @@
  * @Author: yangdan
  * @Date: 2019-09-19 18:20:19
  * @LastEditors: yangdan
- * @LastEditTime: 2019-09-20 17:30:19
+ * @LastEditTime: 2019-10-25 18:29:26
  * @Description: 添加描述
  */
 module.exports = {
@@ -18,7 +18,7 @@ module.exports = {
    * @type {boolean} true | false
    * @description Whether need tagsView
    */
-  tagsView: true,
+  tagsView: false,
 
   /**
    * @type {boolean} true | false

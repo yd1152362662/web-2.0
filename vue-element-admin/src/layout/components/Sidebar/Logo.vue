@@ -2,21 +2,24 @@
  * @Author: yangdan
  * @Date: 2019-09-19 18:20:19
  * @LastEditors: yangdan
- * @LastEditTime: 2019-10-25 10:45:56
+ * @LastEditTime: 2019-10-25 18:07:10
  * @Description: 添加描述
  -->
 <template>
   <div class="sidebar-logo-container" :class="{'collapse':collapse}">
     <transition name="sidebarLogoFade">
       <router-link v-if="collapse" key="collapse" class="sidebar-logo-link" to="/">
-        <img v-if="logo" :src="logo" class="sidebar-logo" />
+        <div
+          style="display:flex;align-items: center;height:64px;justify-content: center;color:#fff"
+        >
+          <img v-if="logo" :src="logo1" class="sidebar-logo-singer" />
+        </div>
       </router-link>
       <router-link v-else key="expand" class="sidebar-logo-link" to="/">
-        <div style="display:flex;align-items: center;height:86px;justify-content: center;color:#fff">
+        <div
+          style="display:flex;align-items: center;height:64px;justify-content: center;color:#fff"
+        >
           <img v-if="logo" :src="logo" class="sidebar-logo" />
-          <h1>
-            <p style="font-size:20px;">哆啦快运</p>
-          </h1>
         </div>
       </router-link>
     </transition>
@@ -36,8 +39,8 @@ export default {
     return {
       title1: "西南水泥智慧物流",
       title2: "管理平台",
-      logo:
-        "https://wpimg.wallstcn.com/69a1c46c-eb1c-4b46-8bd4-e9e686ef5251.png"
+      logo: require("../../../assets/home/logo.png"),
+      logo1: require("../../../assets/home/logo-singer.png")
     };
   }
 };
@@ -56,49 +59,26 @@ export default {
 .sidebar-logo-container {
   position: relative;
   width: 100%;
-  height: 86px;
-  line-height: 86px;
-  // background: #869bd4;
-  background-image: url("../../../assets/home/logo-bg.png");
-  background-size: 100% 105%;
+  height: 64px;
   text-align: center;
   overflow: hidden;
-
+  border-bottom: 1px solid #ccd6e0;
   & .sidebar-logo-link {
     height: 100%;
     width: 100%;
 
     & .sidebar-logo {
-      width: 32px;
-      height: 32px;
-      vertical-align: middle;
-      margin-right: 12px;
-
+      width: 75%;
+    }
+    & .sidebar-logo-singer {
+      width: 75%;
     }
 
-    & .sidebar-title {
-      // display: inline-block;
-      width: "100%";
-      margin: 0;
-      color: #fff;
-      font-weight: 600;
-      height: 86px;
-      margin-top: 18px;
-      line-height: 25px;
-      font-size: 20px;
-      font-family: Avenir, Helvetica Neue, Arial, Helvetica, sans-serif;
-      vertical-align: middle;
-      p {
-        margin-block-start: 0em;
-        margin-block-end: 0em;
-      }
-    }
   }
 
   &.collapse {
     .sidebar-logo {
       margin-right: 0px;
-
     }
   }
 }

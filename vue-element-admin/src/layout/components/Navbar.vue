@@ -2,7 +2,7 @@
  * @Author: yangdan
  * @Date: 2019-09-19 18:20:19
  * @LastEditors: yangdan
- * @LastEditTime: 2019-09-24 16:06:48
+ * @LastEditTime: 2019-10-25 18:21:31
  * @Description: 添加描述
  -->
 <template>
@@ -13,61 +13,28 @@
       class="hamburger-container"
       @toggleClick="toggleSideBar"
     />
-
     <breadcrumb v-if="device!=='mobile'" id="breadcrumb-container" class="breadcrumb-container" />
 
     <div class="right-menu">
       <template v-if="device!=='mobile'">
-        <!-- <search id="header-search" class="right-menu-item" /> -->
         <error-log class="errLog-container right-menu-item hover-effect" />
-
         <screenfull id="screenfull" class="right-menu-item hover-effect" />
-
         <el-tooltip content="字体调整" effect="light" placement="bottom">
           <size-select id="size-select" class="right-menu-item hover-effect" />
         </el-tooltip>
       </template>
 
-      <el-dropdown class="avatar-container right-menu-item hover-effect" trigger="click">
-        <div class="avatar-wrapper">
-          <span v-if="device!=='mobile'">欢迎回来</span>
-          <img
-            src="http://img.mp.itc.cn/upload/20170716/5138ec2c641f4eb7bbb2d9c6e5ae4bd2_th.jpg"
-            class="user-avatar"
-          >
-          <span>西南水泥</span>
-          <i class="el-icon-caret-bottom" />
-        </div>
-        <el-dropdown-menu slot="dropdown">
-          <router-link to="/profile/index" style="text-align:center">
-            <el-dropdown-item>个人中心</el-dropdown-item>
-          </router-link>
-          <router-link to="/" style="text-align:center">
-            <el-dropdown-item>首页</el-dropdown-item>
-          </router-link>
-          <el-dropdown-item divided style="text-align:center">
-            <span style="display:block;" @click="logout">退出登录</span>
-          </el-dropdown-item>
-        </el-dropdown-menu>
-      </el-dropdown>
-
-      <em @click="toggleisDot">
-        <el-badge :is-dot="isDot" class="item">
-          <svg-icon icon-class="xiaoxi" style="width:25px;height:25px" />
-        </el-badge>
-      </em>
     </div>
   </div>
 </template>
 
 <script>
-import { mapGetters } from 'vuex';
-import Breadcrumb from '@/components/Breadcrumb';
-import Hamburger from '@/components/Hamburger';
-import ErrorLog from '@/components/ErrorLog';
-import Screenfull from '@/components/Screenfull';
-import SizeSelect from '@/components/SizeSelect';
-// import Search from '@/components/HeaderSearch';
+import { mapGetters } from "vuex";
+import Breadcrumb from "@/components/Breadcrumb";
+import Hamburger from "@/components/Hamburger";
+import ErrorLog from "@/components/ErrorLog";
+import Screenfull from "@/components/Screenfull";
+import SizeSelect from "@/components/SizeSelect";
 
 export default {
   components: {
@@ -76,25 +43,24 @@ export default {
     ErrorLog,
     Screenfull,
     SizeSelect
-    // Search
   },
   computed: {
-    ...mapGetters(['sidebar', 'avatar', 'device', 'isDot'])
+    ...mapGetters(["sidebar", "avatar", "device", "isDot"])
   },
   methods: {
     toggleSideBar() {
-      this.$store.dispatch('app/toggleSideBar');
+      this.$store.dispatch("app/toggleSideBar");
     },
     async logout() {
       // await this.$store.dispatch("user/logout");
 
       this.$router.push(`/login?redirect=${this.$route.fullPath}`);
       // localStorage.removeItem("mark");
-      localStorage.setItem('mark', '-1');
+      localStorage.setItem("mark", "-1");
     },
     toggleisDot() {
-      console.log('object');
-      this.$store.dispatch('app/setDot');
+      console.log("object");
+      this.$store.dispatch("app/setDot");
     }
   }
 };
@@ -102,19 +68,15 @@ export default {
 
 <style lang="scss" scoped>
 .navbar {
-  height: 86px;
+  height: 64px;
   overflow: hidden;
   position: relative;
-  background-image: url("../../assets/login/1.png");
-  background-size: 100% 86px;
-  background-position-y: 258px;
-  box-shadow: 0 1px 4px rgba(0, 21, 41, 0.08);
+  background-color: #fff;
   .hamburger-container {
-    line-height: 86px;
     height: 100%;
     float: left;
     cursor: pointer;
-    color: #fff;
+    color: #333;
     transition: background 0.3s;
     -webkit-tap-highlight-color: transparent;
     &:hover {
@@ -124,7 +86,7 @@ export default {
 
   .breadcrumb-container {
     float: left;
-    line-height: 86px;
+    line-height: 64px;
   }
 
   .errLog-container {
@@ -155,13 +117,13 @@ export default {
       padding: 0 8px;
       height: 100%;
       font-size: 18px;
-      color: #5a5e66;
+      color: #333;
       vertical-align: text-bottom;
 
       &.hover-effect {
         cursor: pointer;
         transition: background 0.3s;
-        color: #fff;
+        color: #333;
 
         &:hover {
           background: rgba(0, 0, 0, 0.025);
@@ -193,7 +155,7 @@ export default {
           right: -20px;
           top: 25px;
           font-size: 12px;
-          color: #fff;
+          color: #333;
         }
       }
     }
