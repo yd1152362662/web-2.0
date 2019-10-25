@@ -3,7 +3,7 @@
  * @Author: yangdan
  * @Date: 2019-09-19 18:20:19
  * @LastEditors: yangdan
- * @LastEditTime: 2019-10-24 17:54:22
+ * @LastEditTime: 2019-10-25 16:33:33
  * @Description: 添加描述
  -->
 <template>
@@ -379,6 +379,7 @@ $cursor: #fff;
     display: inline-block;
     height: 47px;
     width: 85%;
+
 
     input {
       background: transparent;

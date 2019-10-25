@@ -1,3 +1,10 @@
+<!--
+ * @Author: yangdan
+ * @Date: 2019-09-19 18:20:19
+ * @LastEditors: yangdan
+ * @LastEditTime: 2019-10-25 17:00:07
+ * @Description: 添加描述
+ -->
 <script>
 export default {
   name: 'MenuItem',
@@ -17,7 +24,7 @@ export default {
     const vnodes = []
 
     if (icon) {
-      vnodes.push(<svg-icon icon-class={icon}/>)
+      vnodes.push(<svg-icon icon-class={icon} style="font-size:18px"/>)
     }
 
     if (title) {

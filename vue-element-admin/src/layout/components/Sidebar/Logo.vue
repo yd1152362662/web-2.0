@@ -2,22 +2,22 @@
  * @Author: yangdan
  * @Date: 2019-09-19 18:20:19
  * @LastEditors: yangdan
- * @LastEditTime: 2019-09-21 14:45:12
+ * @LastEditTime: 2019-10-25 10:45:56
  * @Description: 添加描述
  -->
 <template>
   <div class="sidebar-logo-container" :class="{'collapse':collapse}">
     <transition name="sidebarLogoFade">
       <router-link v-if="collapse" key="collapse" class="sidebar-logo-link" to="/">
-        <!-- <img v-if="logo" :src="logo" class="sidebar-logo">
-        <h1 v-else class="sidebar-title">{{ title }} </h1>-->
+        <img v-if="logo" :src="logo" class="sidebar-logo" />
       </router-link>
       <router-link v-else key="expand" class="sidebar-logo-link" to="/">
-        <!-- <img v-if="logo" :src="logo" class="sidebar-logo" /> -->
-        <h1 class="sidebar-title">
-          <p>{{title1}}</p>
-          <p>{{title2}}</p>
-        </h1>
+        <div style="display:flex;align-items: center;height:86px;justify-content: center;color:#fff">
+          <img v-if="logo" :src="logo" class="sidebar-logo" />
+          <h1>
+            <p style="font-size:20px;">哆啦快运</p>
+          </h1>
+        </div>
       </router-link>
     </transition>
   </div>
@@ -35,8 +35,9 @@ export default {
   data() {
     return {
       title1: "西南水泥智慧物流",
-      title2: "管理平台"
-      // logo: 'https://wpimg.wallstcn.com/69a1c46c-eb1c-4b46-8bd4-e9e686ef5251.png'
+      title2: "管理平台",
+      logo:
+        "https://wpimg.wallstcn.com/69a1c46c-eb1c-4b46-8bd4-e9e686ef5251.png"
     };
   }
 };
@@ -72,6 +73,7 @@ export default {
       height: 32px;
       vertical-align: middle;
       margin-right: 12px;
+
     }
 
     & .sidebar-title {
@@ -96,6 +98,7 @@ export default {
   &.collapse {
     .sidebar-logo {
       margin-right: 0px;
+
     }
   }
 }

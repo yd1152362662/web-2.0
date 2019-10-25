@@ -2,7 +2,7 @@
  * @Author: yangdan
  * @Date: 2019-10-16 10:04:43
  * @LastEditors: yangdan
- * @LastEditTime: 2019-10-16 10:25:41
+ * @LastEditTime: 2019-10-25 16:28:25
  * @Description: 添加描述
  -->
 <template>
@@ -65,27 +65,14 @@ export default {
   },
   methods: {
     initChart() {
-      this.chart = echarts.init(this.$el, "macarons");
+      this.chart = echarts.init(this.$el);
       this.setOptions(this.chartData);
     },
-    setOptions({ expectedData } = {}) {
+    setOptions({ orderNumber,weight } = {}) {
       this.chart.setOption({
         xAxis: {
-          data: [
-            "1月",
-            "2月",
-            "3月",
-            "4月",
-            "5月",
-            "6月",
-            "7月",
-            "8月",
-            "9月",
-            "10月",
-            "11月",
-            "12月"
-          ],
-          boundaryGap: false,
+          data: ["1天", "2天", "3天", "4天", "5天", "6天", "7天"],
+          // boundaryGap: false,
           axisTick: {
             show: false
           }
@@ -111,33 +98,46 @@ export default {
         },
         series: [
           {
-            name: "expected",
+            name: "订单",
+            barWidth: 30, // 柱图宽度
+            barMaxWidth: 30, // 最大宽度
+            barGap: "0", //柱图间距
             itemStyle: {
               normal: {
-                label: { show: true },
-                color: "rgb(80,157,240)",
+                // label: { show: true },
+                color: "#FE3A2E",
                 lineStyle: {
-                  color: "rgb(80,157,240)"
+                  color: "#FE3A2E"
                 }
               }
             },
-            areaStyle: {
-              color: new echarts.graphic.LinearGradient(0, 0, 0, 1, [
-                {
-                  offset: 0,
-                  color: "rgb(93,165,242)"
-                },
-                {
-                  offset: 1,
-                  color: "rgb(201,224,250)"
-                }
-              ])
-            },
             smooth: true,
             type: "line",
-            data: expectedData,
+            data: orderNumber,
             animationDuration: 2800,
             animationEasing: "cubicInOut"
+          },
+          {
+            name: "吨位",
+            smooth: true,
+            type: "line",
+            barWidth: 30, // 柱图宽度
+            barMaxWidth: 30, // 最大宽度
+            itemStyle: {
+              normal: {
+                color: "#248AF2",
+                lineStyle: {
+                  color: "#248AF2",
+                  width: 2
+                },
+                // areaStyle: {
+                //   color: "#f3f8ff"
+                // }
+              }
+            },
+            data: weight,
+            animationDuration: 2800,
+            animationEasing: "quadraticOut"
           }
         ]
       });

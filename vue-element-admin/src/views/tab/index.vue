@@ -2,39 +2,30 @@
  * @Author: yangdan
  * @Date: 2019-09-19 18:20:19
  * @LastEditors: yangdan
- * @LastEditTime: 2019-10-16 17:00:39
+ * @LastEditTime: 2019-10-25 14:57:03
  * @Description: 添加描述
  -->
 <template>
   <div class="basic-box">
     <div class="container-box">
-      <el-tabs v-model="activeName" class="basic-border">
-        <el-tab-pane
-          v-for="item in tabMapOptions"
-          :key="item.key"
-          :label="item.label"
-          :name="item.key"
-        >
-          <!-- <keep-alive>
-          <tab-pane v-if="activeName==item.key" :type="item.key" @create="showCreatedTimes" />
-          </keep-alive>-->
-          <keep-alive>
-            <div>
-              <searchForm :formConfig="formConfig" :value="form">
-                <el-button slot="operate" @click="handleDownload">导出表格</el-button>
-              </searchForm>
-              <MyTable
-                class="MyTable"
-                :table="dataTable"
-                @HandleAnotherOrderFun="HandleAnotherOrder"
-                @HandleViewDetailsFun="HandleViewDetails"
-                @handleSizeChangeFun="handleSizeChange"
-                @handleCurrentChangeFun="handleCurrentChange"
-              ></MyTable>
-            </div>
-          </keep-alive>
-        </el-tab-pane>
-      </el-tabs>
+      <div>
+        <searchForm :formConfig="formConfig" :value="form">
+          <el-button slot="operate" @click="handleDownload">导出表格</el-button>
+        </searchForm>
+        <MyTable
+          class="MyTable"
+          :table="dataTable"
+          @ReleaseFun="Release"
+          @HandleViewDetailsFun="HandleViewDetails"
+          @handleSizeChangeFun="handleSizeChange"
+          @handleCurrentChangeFun="handleCurrentChange"
+        ></MyTable>
+
+        <!-- 弹框 -->
+        <Dialog :show.sync="dialogTableVisible" title="订单发布" @cancel="cancel" @OK="OK">
+             示例弹框
+        </Dialog>
+      </div>
     </div>
   </div>
 </template>
@@ -43,13 +34,15 @@
 import tabPane from "./components/TabPane";
 import MyTable from "./components/MyTable";
 import searchForm from "./components/form";
+import Dialog from "./components/Dialog";
 
 export default {
   name: "Tab",
   components: {
     tabPane,
     MyTable,
-    searchForm
+    searchForm,
+    Dialog
   },
   data() {
     return {
@@ -115,17 +108,10 @@ export default {
           data: [
             // 操作列数据
             {
-              label: "再来一单", // 按钮文字
-              Fun: "HandleAnotherOrderFun", // 点击按钮后触发的父组件事件
+              label: "发布", // 按钮文字
+              Fun: "ReleaseFun", // 点击按钮后触发的父组件事件
               size: "mini", // 按钮大小
               id: "1", // 按钮循环组件的key值
-              classname: "show" // 按钮的类名
-            },
-            {
-              label: "查看", // 按钮文字
-              Fun: "HandleViewDetailsFun", // 点击按钮后触发的父组件事件
-              size: "mini", // 按钮大小
-              id: "2", // 按钮循环组件的key值
               classname: "show" // 按钮的类名
             }
           ]
@@ -140,23 +126,10 @@ export default {
       formConfig: {
         formItemList: [
           {
-            type: "input",
-            prop: "Publisher",
-            label: "发布人",
-            placeholder: "请输入发布人"
-          },
-          {
-            type: "select",
-            prop: "FactoryName",
-            label: "工厂名称",
-            placeholder: "请输入工厂名称",
-            optList: [{ label: "12313", value: "1" }]
-          },
-          {
             type: "datetimerange",
             prop: "datetimerange",
             dateFormate: "yyyy-MM-dd hh:mm:ss",
-            label: "发布时间",
+            label: "时间",
             pickerOptions: {
               shortcuts: [
                 {
@@ -196,16 +169,11 @@ export default {
             placeholder: "请输入车牌号"
           },
           {
-            type: "input",
-            prop: "OrderNumber",
-            label: "订单号",
-            placeholder: "请输入订单号"
-          },
-          {
-            type: "input",
-            prop: "ShipmentNumber",
-            label: "承运单号",
-            placeholder: "请输入承运单号"
+            type: "select",
+            prop: "FactoryName",
+            label: "货物类型",
+            placeholder: "请选择货物类型",
+            optList: [{ label: "12313", value: "1" }]
           }
         ],
         operate: [
@@ -222,7 +190,8 @@ export default {
       downloadLoading: false,
       filename: "",
       autoWidth: true,
-      bookType: "xlsx"
+      bookType: "xlsx",
+      dialogTableVisible: false
     };
   },
   watch: {
@@ -241,27 +210,27 @@ export default {
     showCreatedTimes() {
       this.createdTimes = this.createdTimes + 1;
     },
-    HandleAnotherOrder() {
-      console.log("再来一单");
-
-      this.$confirm("<strong>这是 <i>HTML</i> 片段</strong>", "我是标题", {
-        confirmButtonText: "确定",
-        cancelButtonText: "取消",
-        center: true,
-        dangerouslyUseHTMLString: true
-      })
-        .then(() => {
-          this.$message({
-            type: "success",
-            message: "删除成功!"
-          });
-        })
-        .catch(() => {
-          this.$message({
-            type: "info",
-            message: "已取消删除"
-          });
-        });
+    Release() {
+      console.log("发布了");
+      this.dialogTableVisible = true;
+      // this.$confirm("<strong>这是 <i>HTML</i> 片段</strong>", "我是标题", {
+      //   confirmButtonText: "确定",
+      //   cancelButtonText: "取消",
+      //   center: true,
+      //   dangerouslyUseHTMLString: true
+      // })
+      //   .then(() => {
+      //     this.$message({
+      //       type: "success",
+      //       message: "删除成功!"
+      //     });
+      //   })
+      //   .catch(() => {
+      //     this.$message({
+      //       type: "info",
+      //       message: "已取消删除"
+      //     });
+      //   });
     },
     HandleViewDetails() {
       console.log("查看详情");
@@ -318,6 +287,14 @@ export default {
           return "其他状态";
           break;
       }
+    },
+    cancel() {
+      console.log("取消了");
+      this.dialogTableVisible = false;
+    },
+    OK() {
+      console.log("确认了");
+      this.dialogTableVisible = false;
     }
   }
 };

@@ -2,7 +2,7 @@
  * @Author: yangdan
  * @Date: 2019-09-19 18:20:19
  * @LastEditors: yangdan
- * @LastEditTime: 2019-10-24 17:22:24
+ * @LastEditTime: 2019-10-25 16:46:46
  * @Description: 添加描述
  -->
 <template>
@@ -14,7 +14,7 @@
         :collapse="isCollapse"
         :background-color="variables.menuBg"
         :text-color="variables.menuText"
-        :unique-opened="false"
+        :unique-opened="true"
         :active-text-color="variables.menuActiveText"
         :collapse-transition="false"
         mode="vertical"
@@ -83,7 +83,7 @@ export default {
 
 <style  scoped>
 .active-bg-color > .menu-wrapper >>> .is-active {
-  background-color: #e0f0ff !important;
-  border-left: 4px solid #2aa3f6 !important;
+  background-color: rgba(36,138,242,0.1) !important;
+  /* border-left: 4px solid #2aa3f6 !important; */
 }
 </style>

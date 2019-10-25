@@ -2,7 +2,7 @@
  * @Author: yangdan
  * @Date: 2019-10-15 14:10:17
  * @LastEditors: yangdan
- * @LastEditTime: 2019-10-16 17:17:18
+ * @LastEditTime: 2019-10-25 13:59:38
  * @Description: 添加描述
  -->
 <template>
@@ -26,7 +26,7 @@
       </el-row>
 
       <!-- 厂的走量趋势 和所有厂运输排行 -->
-      <div class="dashboard-center">
+      <!-- <div class="dashboard-center">
         <el-row :gutter="20">
           <el-col :span="12">
             <div class="title-box">
@@ -74,10 +74,15 @@
             </titlieBox>
           </el-col>
         </el-row>
-      </div>
+      </div>-->
+      <el-row>
+        <el-col :span="24">
+          <LineChart :chartData="chartData"></LineChart>
+        </el-col>
+      </el-row>
     </div>
     <!-- 下部分 -->
-    <div style="margin-top:12px;">
+    <!-- <div style="margin-top:12px;">
       <div class="container-box">
         <div class="dashboard-footer">
           <el-row>
@@ -102,7 +107,7 @@
           </el-row>
         </div>
       </div>
-    </div>
+    </div>-->
   </div>
 </template>
 
@@ -154,26 +159,14 @@ export default {
         }
       ],
       chartData: {
-        expectedData: [
-          100,
-          120,
-          161,
-          134,
-          105,
-          160,
-          165,
-          112,
-          113,
-          114,
-          115,
-          123
-        ]
+        orderNumber: [100, 52, 169, 134, 105, 160, 55],
+        weight: [134, 75, 160, 165,40, 120, 161]
       },
       formInline: {
         date: "",
         factory: ""
       },
-      date:'',
+      date: "",
       pickerOptions: {
         shortcuts: [
           {
