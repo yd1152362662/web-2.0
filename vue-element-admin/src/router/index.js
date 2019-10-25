@@ -5,13 +5,13 @@
  * @LastEditTime: 2019-10-25 16:57:42
  * @Description: 添加描述
  */
-import Vue from "vue";
-import Router from "vue-router";
+import Vue from 'vue';
+import Router from 'vue-router';
 
 Vue.use(Router);
 
 /* Layout */
-import Layout from "@/layout";
+import Layout from '@/layout';
 // console.log('Layout', Layout)
 
 /* Router Modules */
@@ -48,131 +48,131 @@ import Layout from "@/layout";
  */
 export const constantRoutes = [
   {
-    path: "/redirect",
+    path: '/redirect',
     component: Layout,
     hidden: true,
     children: [
       {
-        path: "/redirect/:path*",
-        component: () => import("@/views/redirect/index")
+        path: '/redirect/:path*',
+        component: () => import('@/views/redirect/index')
       }
     ]
   },
   {
-    path: "/login",
-    component: () => import("@/views/login/index"),
+    path: '/login',
+    component: () => import('@/views/login/index'),
     hidden: true
   },
   {
-    path: "/auth-redirect",
-    component: () => import("@/views/login/auth-redirect"),
+    path: '/auth-redirect',
+    component: () => import('@/views/login/auth-redirect'),
     hidden: true
   },
   {
-    path: "/404",
-    component: () => import("@/views/error-page/404"),
+    path: '/404',
+    component: () => import('@/views/error-page/404'),
     hidden: true
   },
   {
-    path: "/401",
-    component: () => import("@/views/error-page/401"),
+    path: '/401',
+    component: () => import('@/views/error-page/401'),
     hidden: true
   },
   {
-    path: "/",
+    path: '/',
     component: Layout,
-    redirect: "/dashboard",
+    redirect: '/dashboard',
     children: [
       {
-        path: "dashboard",
-        component: () => import("@/views/dashboard/index"),
-        name: "首页看板",
-        meta: { title: "首页看板", icon: "sidebar-home", affix: true }
+        path: 'dashboard',
+        component: () => import('@/views/dashboard/index'),
+        name: '首页看板',
+        meta: { title: '首页看板', icon: 'sidebar-home', affix: true }
       }
     ]
   },
   {
-    path: "/orderIssue",
+    path: '/orderIssue',
     component: Layout,
-    redirect: "/orderIssue",
-    name: "订单发布",
-    meta: { title: "订单发布", icon: "sidebar-order-issue"},
+    redirect: '/orderIssue',
+    name: '订单发布',
+    meta: { title: '订单发布', icon: 'sidebar-order-issue' },
     alwaysShow: true,
     children: [
       {
-        path: "orderIssue1",
-        component: () => import("@/views/dashboard/index"),
-        name: "创建订单",
+        path: 'orderIssue1',
+        component: () => import('@/views/dashboard/index'),
+        name: '创建订单',
         hidden: false,
-        meta: { title: "创建订单"}
+        meta: { title: '创建订单', disabled: false }
       },
       {
-        path: "orderIssue2",
-        component: () => import("@/views/dashboard/index"),
-        name: "erp订单",
-        hidden: true,
-        meta: { title: "erp订单"}
+        path: 'orderIssue2',
+        component: () => import('@/views/dashboard/index'),
+        name: 'erp订单',
+        hidden: false,
+        meta: { title: 'erp订单', disabled: false }
       }
     ]
   },
   {
-    path: "/orderList",
+    path: '/orderList',
     component: Layout,
-    redirect: "/orderList",
-    name: "订单列表",
-    meta: { title: "订单列表", icon: "sidebar-order-list"},
+    redirect: '/orderList',
+    name: '订单列表',
+    meta: { title: '订单列表', icon: 'sidebar-order-list' },
     children: [
       {
-        path: "orderList",
-        component: () => import("@/views/dashboard/index"),
-        name: "订单列表",
-        meta: { title: "订单列表"}
+        path: 'orderList',
+        component: () => import('@/views/tab/index'),
+        name: '订单列表 ',
+        meta: { title: '订单列表' }
       }
     ]
   },
   {
-    path: "/flowManagement",
+    path: '/flowManagement',
     component: Layout,
-    redirect: "/flowManagement",
-    name: "流向管理",
-    meta: { title: "流向管理", icon: "sidebar-flow-management"},
+    redirect: '/flowManagement',
+    name: '流向管理',
+    meta: { title: '流向管理', icon: 'sidebar-flow-management' },
     children: [
       {
-        path: "flowManagement",
-        component: () => import("@/views/flow-management/index"),
-        name: "流向管理",
-        meta: { title: "流向管理"}
+        path: 'flowManagement',
+        component: () => import('@/views/flow-management/index'),
+        name: '流向管理 ',
+        meta: { title: '流向管理' }
       }
     ]
   },
 
   {
-    path: "/report",
+    path: '/report',
     component: Layout,
-    redirect: "/report",
-    name: "报表统计",
-    meta: { title: "报表统计", icon: "sidebar-report"},
+    redirect: '/report',
+    name: '报表统计',
+    meta: { title: '报表统计', icon: 'sidebar-report' },
     children: [
       {
-        path: "report",
-        component: () => import("@/views/dashboard/index"),
-        name: "报表统计",
-        meta: { title: "报表统计"}
+        path: 'report',
+        component: () => import('@/views/tab/index'),
+        name: '报表统计 ',
+        meta: { title: '报表统计' }
       }
     ]
   },
 
   {
-    path: "/profile",
+    path: '/profile',
     component: Layout,
-    redirect: "/profile/index",
+    redirect: '/profile/index',
     hidden: true,
     children: [
       {
-        path: "index",
-        component: () => import("@/views/profile/index"),
-        name: "Profile",
-        meta: { title: "Profile", icon: "user", noCache: true }
+        path: 'index',
+        component: () => import('@/views/profile/index'),
+        name: 'Profile',
+        meta: { title: 'Profile', icon: 'user', noCache: true }
       }
     ]
   }
@@ -180,20 +180,20 @@ export const constantRoutes = [
 
 export const constantRoutes1 = [
   {
-    path: "/tab1",
+    path: '/tab1',
     component: Layout,
     alwaysShow: true,
-    meta: { title: "正常发单", icon: "tab" },
+    meta: { title: '正常发单', icon: 'tab' },
     children: [
       {
-        path: "index1",
-        component: () => import("@/views/tab/index"),
-        name: "Tab1",
-        meta: { title: "正常发单" }
+        path: 'index1',
+        component: () => import('@/views/tab/index'),
+        name: 'Tab1',
+        meta: { title: '正常发单' }
       }
     ]
   },
-  { path: "*", redirect: "/404", hidden: true }
+  { path: '*', redirect: '/404', hidden: true }
 ];
 
 /**
@@ -202,38 +202,38 @@ export const constantRoutes1 = [
  */
 export const asyncRoutes = [
   {
-    path: "/tab",
+    path: '/tab',
     component: Layout,
     children: [
       {
-        path: "index",
-        component: () => import("@/views/tab/index"),
-        name: "Tab",
-        meta: { title: "erp发单", icon: "tab" }
+        path: 'index',
+        component: () => import('@/views/tab/index'),
+        name: 'Tab',
+        meta: { title: 'erp发单', icon: 'tab' }
       }
     ]
   },
 
   {
-    path: "/online-car",
+    path: '/online-car',
     component: Layout,
-    redirect: "/online-car/appointed-task",
-    name: "online-car",
+    redirect: '/online-car/appointed-task',
+    name: 'online-car',
     meta: {
-      title: "在线找车",
-      icon: "excel"
+      title: '在线找车',
+      icon: 'excel'
     },
     children: [
       {
-        path: "appointed-task",
-        component: () => import("@/views/online-car/appointed-task"),
-        name: "AppointedTask",
-        meta: { title: "指派任务" }
+        path: 'appointed-task',
+        component: () => import('@/views/online-car/appointed-task'),
+        name: 'AppointedTask',
+        meta: { title: '指派任务' }
       }
     ]
   },
   // 404 page must be placed at the end !!!
-  { path: "*", redirect: "/404", hidden: true }
+  { path: '*', redirect: '/404', hidden: true }
 ];
 
 const createRouter = () =>
@@ -251,29 +251,12 @@ export function resetRouter() {
   router.matcher = newRouter.matcher; // reset router
 }
 
-router.$addRoutes = params => {
-  // console.log(routers,'jiaegi')
-  if (Array.isArray(params)) {
-    // params.forEach((item,i)=>{
-    //   let routers = router.options.routes
-    //   let itemChildren = item.children || {}
-    //   var findRes = routers.find(rItems=>{
-    //     let rItemsChildren = rItems.children || {}
-    //     return !(rItemsChildren.name===itemChildren.name||rItemsChildren.path===itemChildren.path)
-    //   })
-    //   if(!findRes) {
-    //     console.log(item)
-    //     router.matcher = new Router({routes:constantRoutes}).matcher;
-    //     router.options.routes = router.options.routes.concat([item])
-    //     router.addRoutes([item]);
-    //   }
-    // });
-    router.options.routes = router.options.routes.concat(params);
-    router.addRoutes(params);
-    console.log(router, "路由");
+router.beforeEach((to, form, next) => {
+  if (to.meta.disabled === true) {
+    next('/404');
   } else {
-    throw "params is not a Array";
+    next();
   }
-};
+});
 
 export default router;

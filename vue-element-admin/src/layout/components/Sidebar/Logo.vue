@@ -10,16 +10,16 @@
     <transition name="sidebarLogoFade">
       <router-link v-if="collapse" key="collapse" class="sidebar-logo-link" to="/">
         <div
-          style="display:flex;align-items: center;height:64px;justify-content: center;color:#fff"
+          style="display:flex;align-items: center;height:64px;justify-content: center;"
         >
-          <img v-if="logo" :src="logo1" class="sidebar-logo-singer" />
+          <img v-if="logo" :src="logo1" class="sidebar-logo-singer">
         </div>
       </router-link>
       <router-link v-else key="expand" class="sidebar-logo-link" to="/">
         <div
-          style="display:flex;align-items: center;height:64px;justify-content: center;color:#fff"
+          style="display:flex;align-items: center;height:64px;justify-content: center;"
         >
-          <img v-if="logo" :src="logo" class="sidebar-logo" />
+          <img v-if="logo" :src="logo" class="sidebar-logo">
         </div>
       </router-link>
     </transition>
@@ -28,7 +28,7 @@
 
 <script>
 export default {
-  name: "SidebarLogo",
+  name: 'SidebarLogo',
   props: {
     collapse: {
       type: Boolean,
@@ -37,10 +37,10 @@ export default {
   },
   data() {
     return {
-      title1: "西南水泥智慧物流",
-      title2: "管理平台",
-      logo: require("../../../assets/home/logo.png"),
-      logo1: require("../../../assets/home/logo-singer.png")
+      title1: '西南水泥智慧物流',
+      title2: '管理平台',
+      logo: require('../../../assets/home/logo.png'),
+      logo1: require('../../../assets/home/logo-singer.png')
     };
   }
 };
@@ -62,7 +62,8 @@ export default {
   height: 64px;
   text-align: center;
   overflow: hidden;
-  border-bottom: 1px solid #ccd6e0;
+  border-bottom: 1px solid #ebecec;
+  border-right: 1px solid #f8f7f7;
   & .sidebar-logo-link {
     height: 100%;
     width: 100%;

@@ -16,51 +16,39 @@
     <breadcrumb v-if="device!=='mobile'" id="breadcrumb-container" class="breadcrumb-container" />
 
     <div class="right-menu">
-      <template v-if="device!=='mobile'">
-        <error-log class="errLog-container right-menu-item hover-effect" />
-        <screenfull id="screenfull" class="right-menu-item hover-effect" />
-        <el-tooltip content="字体调整" effect="light" placement="bottom">
-          <size-select id="size-select" class="right-menu-item hover-effect" />
-        </el-tooltip>
+      <template>
+        <svg-icon icon-class="bug" />
+        <span style="font-size:15px;color:#333">欢迎杨浩登录哆啦快运货主版</span>
+        <el-button size="mini" @click="logout">退出</el-button>
       </template>
-
     </div>
   </div>
 </template>
 
 <script>
-import { mapGetters } from "vuex";
-import Breadcrumb from "@/components/Breadcrumb";
-import Hamburger from "@/components/Hamburger";
-import ErrorLog from "@/components/ErrorLog";
-import Screenfull from "@/components/Screenfull";
-import SizeSelect from "@/components/SizeSelect";
+import { mapGetters } from 'vuex';
+import Breadcrumb from '@/components/Breadcrumb';
+import Hamburger from '@/components/Hamburger';
 
 export default {
   components: {
     Breadcrumb,
-    Hamburger,
-    ErrorLog,
-    Screenfull,
-    SizeSelect
+    Hamburger
   },
   computed: {
-    ...mapGetters(["sidebar", "avatar", "device", "isDot"])
+    ...mapGetters(['sidebar', 'avatar', 'device', 'isDot'])
   },
   methods: {
     toggleSideBar() {
-      this.$store.dispatch("app/toggleSideBar");
+      this.$store.dispatch('app/toggleSideBar');
     },
     async logout() {
-      // await this.$store.dispatch("user/logout");
-
       this.$router.push(`/login?redirect=${this.$route.fullPath}`);
-      // localStorage.removeItem("mark");
-      localStorage.setItem("mark", "-1");
+      localStorage.setItem('mark', '-1');
     },
     toggleisDot() {
-      console.log("object");
-      this.$store.dispatch("app/setDot");
+      console.log('object');
+      this.$store.dispatch('app/setDot');
     }
   }
 };
@@ -68,15 +56,19 @@ export default {
 
 <style lang="scss" scoped>
 .navbar {
-  height: 64px;
+  height: 63px;
   overflow: hidden;
   position: relative;
   background-color: #fff;
+  box-shadow:10px 0px 16px 0px rgba(0,0,0,0.1);
   .hamburger-container {
     height: 100%;
     float: left;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
     cursor: pointer;
-    color: #333;
     transition: background 0.3s;
     -webkit-tap-highlight-color: transparent;
     &:hover {
@@ -97,7 +89,8 @@ export default {
   .right-menu {
     float: right;
     height: 100%;
-    line-height: 86px;
+    line-height: 64px;
+    padding-right: 20px;
 
     &:focus {
       outline: none;

@@ -10,24 +10,24 @@
 </template>
 
 <script>
-import echarts from "echarts";
-require("echarts/theme/macarons"); // echarts theme
-import resize from "./mixins/resize";
+import echarts from 'echarts';
+require('echarts/theme/macarons'); // echarts theme
+import resize from './mixins/resize';
 
 export default {
   mixins: [resize],
   props: {
     className: {
       type: String,
-      default: "chart"
+      default: 'chart'
     },
     width: {
       type: String,
-      default: "100%"
+      default: '100%'
     },
     height: {
       type: String,
-      default: "350px"
+      default: '350px'
     },
     autoResize: {
       type: Boolean,
@@ -68,14 +68,38 @@ export default {
       this.chart = echarts.init(this.$el);
       this.setOptions(this.chartData);
     },
-    setOptions({ orderNumber,weight } = {}) {
+    setOptions({ orderNumber, weight } = {}) {
       this.chart.setOption({
         xAxis: {
-          data: ["1天", "2天", "3天", "4天", "5天", "6天", "7天"],
-          // boundaryGap: false,
+          data: [
+            '2019-10-18',
+            '2019-10-19',
+            '2019-10-20',
+            '2019-10-21',
+            '2019-10-22',
+            '2019-10-23',
+            '2019-10-24'
+          ],
           axisTick: {
             show: false
+          },
+          splitLine: {
+            show: false
           }
+        },
+        legend: {
+          itemHeight: 10,
+          itemWidth: 10,
+          data: [
+            {
+              name: '订单',
+              icon: 'circle'
+            },
+            {
+              name: '吨位',
+              icon: 'circle'
+            }
+          ]
         },
         grid: {
           left: 10,
@@ -85,59 +109,74 @@ export default {
           containLabel: true
         },
         tooltip: {
-          trigger: "axis",
-          axisPointer: {
-            type: "cross"
-          },
+          trigger: 'axis',
           padding: [5, 10]
         },
-        yAxis: {
-          axisTick: {
-            show: false
+        yAxis: [
+          {
+            type: 'value',
+            name: '单',
+            nameLocation: 'end',
+            show: true,
+            splitLine: {
+              show: false
+            },
+            nameTextStyle: {
+              padding: [0, 30, 0, 0]
+            }
+          },
+          {
+            type: 'value',
+            name: '吨',
+            nameLocation: 'end',
+            show: true,
+            splitLine: {
+              show: false
+            },
+            nameTextStyle: {
+              padding: [0, 0, 0, 30]
+            }
           }
-        },
+        ],
         series: [
           {
-            name: "订单",
+            name: '订单',
             barWidth: 30, // 柱图宽度
             barMaxWidth: 30, // 最大宽度
-            barGap: "0", //柱图间距
+            barGap: '0', // 柱图间距
             itemStyle: {
               normal: {
-                // label: { show: true },
-                color: "#FE3A2E",
+                color: '#FE3A2E',
                 lineStyle: {
-                  color: "#FE3A2E"
+                  color: '#FE3A2E',
+                  width: 1
                 }
               }
             },
-            smooth: true,
-            type: "line",
+            type: 'line',
+            yAxisIndex: 0,
             data: orderNumber,
             animationDuration: 2800,
-            animationEasing: "cubicInOut"
+            animationEasing: 'cubicInOut'
           },
           {
-            name: "吨位",
-            smooth: true,
-            type: "line",
+            name: '吨位',
+            type: 'line',
             barWidth: 30, // 柱图宽度
             barMaxWidth: 30, // 最大宽度
             itemStyle: {
               normal: {
-                color: "#248AF2",
+                color: '#248AF2',
                 lineStyle: {
-                  color: "#248AF2",
-                  width: 2
-                },
-                // areaStyle: {
-                //   color: "#f3f8ff"
-                // }
+                  color: '#248AF2',
+                  width: 1
+                }
               }
             },
             data: weight,
+            yAxisIndex: 1,
             animationDuration: 2800,
-            animationEasing: "quadraticOut"
+            animationEasing: 'quadraticOut'
           }
         ]
       });

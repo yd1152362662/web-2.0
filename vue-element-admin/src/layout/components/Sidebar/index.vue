@@ -6,7 +6,7 @@
  * @Description: 添加描述
  -->
 <template>
-  <div :class="{'has-logo':showLogo}">
+  <div :class="{'has-logo':showLogo}" style="box-shadow:10px 0px 16px 0px rgba(0,0,0,0.1);">
     <logo v-if="showLogo" :collapse="isCollapse" />
     <el-scrollbar wrap-class="scrollbar-wrapper">
       <el-menu
@@ -21,7 +21,7 @@
         class="active-bg-color"
       >
         <sidebar-item
-          v-for="route in get_routes"
+          v-for="route in constantRoutes"
           :key="route.path"
           :item="route"
           :base-path="route.path"
@@ -32,24 +32,24 @@
 </template>
 
 <script>
-import { mapGetters } from "vuex";
-import Logo from "./Logo";
-import SidebarItem from "./SidebarItem";
-import variables from "@/styles/variables.scss";
-import { asyncRoutes, constantRoutes1, constantRoutes } from "@/router";
+import { mapGetters } from 'vuex';
+import Logo from './Logo';
+import SidebarItem from './SidebarItem';
+import variables from '@/styles/variables.scss';
+import { constantRoutes } from '@/router';
 
 export default {
   components: { SidebarItem, Logo },
   data() {
     return {
-      constantRoutes: [],
-      mark: localStorage.getItem("mark"),
+      constantRoutes: constantRoutes,
+      mark: localStorage.getItem('mark'),
       time: true
     };
   },
 
   computed: {
-    ...mapGetters(["get_routes", "sidebar"]),
+    ...mapGetters(['sidebar']),
     activeMenu() {
       const route = this.$route;
       const { meta, path } = route;
@@ -71,19 +71,17 @@ export default {
   },
 
   mounted() {
-    this.$store.dispatch("getRouter/generateRoutes", this.mark);
+    // this.$store.dispatch("getRouter/generateRoutes", this.mark);
+    this.$store.dispatch('getRouter/changeRoutes', this.mark);
   },
-
-  methods: {},
-  destroyed() {
-    this.$store.dispatch("getRouter/destroyedRoutes", this.mark);
-  }
+  destroyed() {},
+  methods: {}
 };
 </script>
 
 <style  scoped>
 .active-bg-color > .menu-wrapper >>> .is-active {
-  background-color: rgba(36,138,242,0.1) !important;
+  background-color: rgba(36, 138, 242, 0.1) !important;
   /* border-left: 4px solid #2aa3f6 !important; */
 }
 </style>

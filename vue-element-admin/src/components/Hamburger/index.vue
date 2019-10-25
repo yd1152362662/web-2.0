@@ -28,7 +28,7 @@
 
 <script>
 export default {
-  name: "Hamburger",
+  name: 'Hamburger',
   props: {
     isActive: {
       type: Boolean,
@@ -37,7 +37,7 @@ export default {
   },
   methods: {
     toggleClick() {
-      this.$emit("toggleClick");
+      this.$emit('toggleClick');
     }
   }
 };
@@ -46,10 +46,8 @@ export default {
 <style scoped>
 .hamburger {
   cursor: pointer;
-  line-height: 30px;
-  vertical-align: middle;
-  width: 28px;
-  height: 28px;
+  width: 20px;
+  height: 20px;
 }
 
 .hamburger.is-active {

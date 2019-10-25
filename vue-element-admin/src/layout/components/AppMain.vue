@@ -17,7 +17,7 @@
 
 <script>
 export default {
-  name: "AppMain",
+  name: 'AppMain',
   computed: {
     cachedViews() {
       return this.$store.state.tagsView.cachedViews;
@@ -40,7 +40,7 @@ export default {
 
 .fixed-header + .app-main {
   padding-top: 50px;
-  background-color: #f0f2f5;
+  background-color: #f6fafe;
 }
 
 .hasTagsView {
@@ -64,29 +64,19 @@ export default {
 }
 
 .basic-box {
-  padding: 0 27px;
-  background-color: rgb(240, 242, 245);
-  background-image: url("../../assets/home/bg.png");
-  background-repeat: no-repeat;
-  background-size: 100% 296px;
+  padding: 35px 24px;
   position: relative;
 }
 .container-box {
-  padding: 25px 38px;
+  padding: 25px 24px;
   background-color: rgb(255, 255, 255);
+  border-radius: 10px;
 }
 .basic-border {
   box-shadow: 0px 2px 20px 0px rgba(36, 139, 242, 0.13);
   border-radius: 10px;
   border: 1px solid rgba(188, 218, 248, 1);
-  padding:15px 32px;
+  padding: 15px 32px;
 }
-
 </style>
-
-
-
-
-
-
 
