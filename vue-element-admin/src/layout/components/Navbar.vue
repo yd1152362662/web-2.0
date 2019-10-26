@@ -2,7 +2,7 @@
  * @Author: yangdan
  * @Date: 2019-09-19 18:20:19
  * @LastEditors: yangdan
- * @LastEditTime: 2019-10-25 18:21:31
+ * @LastEditTime: 2019-10-26 14:51:17
  * @Description: 添加描述
  -->
 <template>
@@ -18,7 +18,7 @@
     <div class="right-menu">
       <template>
         <svg-icon icon-class="bug" />
-        <span style="font-size:15px;color:#333">欢迎杨浩登录哆啦快运货主版</span>
+        <span style="font-size:15px;color:#333">欢迎XXX登录哆啦快运货主版</span>
         <el-button size="mini" @click="logout">退出</el-button>
       </template>
     </div>
