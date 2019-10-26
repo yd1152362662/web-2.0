@@ -2,7 +2,7 @@
  * @Author: yangdan
  * @Date: 2019-10-15 14:10:17
  * @LastEditors: yangdan
- * @LastEditTime: 2019-10-25 13:59:38
+ * @LastEditTime: 2019-10-26 11:44:45
  * @Description: 添加描述
  -->
 <template>
@@ -10,104 +10,39 @@
     <!-- 上部分 -->
     <div class="container-box">
       <!-- tab 卡片部分 -->
-      <el-row :gutter="20">
-        <el-col :span="6">
-          <CardItem></CardItem>
+      <el-row :gutter="24">
+        <p>总订单</p>
+        <el-col :xs="24" :sm="24" :md="24" :lg="8" :xl="8">
+          <CardItem backgroundColor="#248AF2" boxShadow="0px 6px 16px 0px rgba(36,138,242,0.4)" titleLeft="发布订单" titleRight="已完成订单"></CardItem>
         </el-col>
-        <el-col :span="6">
-          <CardItem></CardItem>
+        <el-col :xs="24" :sm="24" :md="24" :lg="8" :xl="8">
+          <CardItem backgroundColor="#FECC41" boxShadow="0px 6px 16px 0px rgba(254,204,65,0.4)" titleLeft="待签收订单" titleRight="运输中订单"></CardItem>
         </el-col>
-        <el-col :span="6">
-          <CardItem></CardItem>
-        </el-col>
-        <el-col :span="6">
-          <CardItem></CardItem>
+        <el-col :xs="24" :sm="24" :md="24" :lg="8" :xl="8">
+          <CardItem backgroundColor="#FE3A2E" boxShadow="0px 6px 16px 0px rgba(254,58,46,0.4)" titleLeft="已完成订单" titleRight="已完成订单" :Expand="Expand" ExpandTitieState=1></CardItem>
         </el-col>
       </el-row>
 
-      <!-- 厂的走量趋势 和所有厂运输排行 -->
-      <!-- <div class="dashboard-center">
-        <el-row :gutter="20">
-          <el-col :span="12">
-            <div class="title-box">
-              <p class="title-p">所有厂运输总量走势数据</p>
-              <el-divider></el-divider>
-              <el-form :inline="true" :model="formInline" class="search-form">
-                <el-form-item>
-                  <el-date-picker
-                    v-model="formInline.date"
-                    type="datetimerange"
-                    :picker-options="pickerOptions"
-                    range-separator="至"
-                    start-placeholder="开始日期"
-                    end-placeholder="结束日期"
-                    align="right"
-                  ></el-date-picker>
-                </el-form-item>
-                <el-form-item>
-                  <el-select v-model="formInline.factory" placeholder="选择厂">
-                    <el-option label="区域一" value="shanghai"></el-option>
-                    <el-option label="区域二" value="beijing"></el-option>
-                  </el-select>
-                </el-form-item>
+      <el-row :gutter="24">
+        <p style="padding-top:10px">今日订单</p>
+        <el-col :xs="24" :sm="24" :md="24" :lg="8" :xl="8">
+          <CardItem textColor="#454450" borderColor="1px solid #BCDAF8" titleLeft="发布订单" titleRight="未接单订单"></CardItem>
+        </el-col>
+        <el-col :xs="24" :sm="24" :md="24" :lg="8" :xl="8">
+          <CardItem textColor="#454450" borderColor="1px solid #BCDAF8" titleLeft="待签收订单" titleRight="已完成订单"></CardItem>
+        </el-col>
+        <el-col :xs="24" :sm="24" :md="24" :lg="8" :xl="8">
+          <CardItem textColor="#454450" borderColor="1px solid #BCDAF8" titleLeft="运输中订单" titleRight="运输中订单" :Expand="Expand" ExpandTitieState=1></CardItem>
+        </el-col>
+      </el-row>
 
-              </el-form>
-              <LineChart :chartData="chartData"></LineChart>
-            </div>
-          </el-col>
-          <el-col :span="12">
-            <titlieBox title="所有厂运输排行">
-              <el-table :data="tableData" style="width: 100%" class="table-border">
-                <el-table-column label="排行">
-                  <template slot-scope="scope">
-                    <img
-                      src="http://img5.imgtn.bdimg.com/it/u=3939290468,2706683257&fm=26&gp=0.jpg"
-                      style="width:30px;height:30px"
-                    />
-                    <span style="margin-left: 10px">{{ scope.row.date }}</span>
-                  </template>
-                </el-table-column>
-                <el-table-column label="厂编" prop="name"></el-table-column>
-                <el-table-column label="分厂" prop="name"></el-table-column>
-                <el-table-column label="运输总量/吨" prop="name"></el-table-column>
-              </el-table>
-            </titlieBox>
-          </el-col>
-        </el-row>
-      </div>-->
       <el-row>
+        <p style="padding-top:10px">近7天发布订单对比</p>
         <el-col :span="24">
           <LineChart :chartData="chartData"></LineChart>
         </el-col>
       </el-row>
     </div>
-    <!-- 下部分 -->
-    <!-- <div style="margin-top:12px;">
-      <div class="container-box">
-        <div class="dashboard-footer">
-          <el-row>
-            <el-col :span="24">
-              <titlieBox title="本周数据统计">
-                <el-row :gutter="20">
-                  <el-col :span="8">
-                    <p>订单量</p>
-                    <pipeChart></pipeChart>
-                  </el-col>
-                  <el-col :span="8">
-                    <p>运输货物重量</p>
-                    <pipeChart></pipeChart>
-                  </el-col>
-                  <el-col :span="8">
-                    <p>货物类型</p>
-                    <pipeChart></pipeChart>
-                  </el-col>
-                </el-row>
-              </titlieBox>
-            </el-col>
-          </el-row>
-        </div>
-      </div>
-    </div>-->
   </div>
 </template>
 
@@ -160,7 +95,7 @@ export default {
       ],
       chartData: {
         orderNumber: [100, 52, 169, 134, 105, 160, 55],
-        weight: [134, 75, 160, 165,40, 120, 161]
+        weight: [134, 75, 160, 165, 40, 120, 161]
       },
       formInline: {
         date: "",
@@ -197,7 +132,8 @@ export default {
             }
           }
         ]
-      }
+      },
+      Expand:true
     };
   },
   methods: {}
@@ -205,6 +141,15 @@ export default {
 </script>
 
 <style lang="scss" scoped>
+p {
+  margin-block-start: 0;
+  margin-block-end: 0;
+  font-size: 24px;
+  font-weight: 500;
+  color: rgba(69, 68, 80, 1);
+  line-height: 37px;
+  padding: 0 0 10px 12px;
+}
 .container-box {
   .dashboard-center,
   .dashboard-footer {
@@ -212,30 +157,6 @@ export default {
     border-radius: 10px;
     border: 1px solid rgba(188, 218, 248, 1);
   }
-}
-.dashboard-center {
-  margin-top: 22px;
-  padding-bottom: 50px;
-}
-.dashboard-footer {
-  p {
-    text-align: center;
-    margin-block-start: 0;
-    margin-block-end: 0;
-    width: 166px;
-    height: 48px;
-    background: rgba(36, 139, 242, 0.1);
-    border-radius: 24px;
-    border: 1px solid rgba(36, 139, 242, 1);
-    line-height: 48px;
-    vertical-align: middle;
-    margin: 10px auto;
-    color: #248bf2;
-  }
-}
-.search-form {
-  display: flex;
-  justify-content: space-between;
 }
 </style>
 

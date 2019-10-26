@@ -2,7 +2,7 @@
  * @Author: yangdan
  * @Date: 2019-09-19 18:20:19
  * @LastEditors: yangdan
- * @LastEditTime: 2019-10-16 13:47:33
+ * @LastEditTime: 2019-10-26 14:47:27
  * @Description: 添加描述
  -->
 <template>
@@ -37,7 +37,7 @@ export default {
 ::-webkit-scrollbar-thumb
 {
     -webkit-box-shadow: inset 0 0 6px rgba(60, 178, 247, 0.3);
-    background-color: #076EFD;
+    background-color:rgba(168, 169, 172, 0.8);
 }
 
 

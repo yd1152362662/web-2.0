@@ -90,6 +90,10 @@ export default {
         legend: {
           itemHeight: 10,
           itemWidth: 10,
+          textStyle: { //图例文字的样式
+            color: '#333',
+            fontSize: 14
+          },
           data: [
             {
               name: '订单',
