@@ -2,7 +2,7 @@
  * @Author: yangdan
  * @Date: 2019-09-19 18:20:19
  * @LastEditors: yangdan
- * @LastEditTime: 2019-10-25 18:24:21
+ * @LastEditTime: 2019-10-28 10:17:08
  * @Description: 添加描述
  -->
 <template>
@@ -81,6 +81,10 @@ export default {
 
 <style  scoped>
 .active-bg-color > .menu-wrapper >>> .is-active {
+  background-color: rgba(36, 138, 242, 0.1) !important;
+  /* border-left: 4px solid #2aa3f6 !important; */
+}
+.active-bg-color >>>.menu-wrapper >>> ul {
   background-color: rgba(36, 138, 242, 0.1) !important;
   /* border-left: 4px solid #2aa3f6 !important; */
 }

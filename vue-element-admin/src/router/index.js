@@ -2,7 +2,7 @@
  * @Author: yangdan
  * @Date: 2019-09-19 18:20:19
  * @LastEditors: yangdan
- * @LastEditTime: 2019-10-25 16:57:42
+ * @LastEditTime: 2019-10-28 10:27:19
  * @Description: 添加描述
  */
 import Vue from 'vue';
@@ -104,14 +104,14 @@ export const constantRoutes = [
         component: () => import('@/views/dashboard/index'),
         name: '创建订单',
         hidden: false,
-        meta: { title: '创建订单', disabled: false }
+        meta: { title: '创建订单',icon: 'sidebar-order-issue', disabled: false }
       },
       {
         path: 'orderIssue2',
-        component: () => import('@/views/dashboard/index'),
-        name: 'erp订单',
+        component: () => import('@/views/order-issue/erp-order'),
+        name: '工厂ERP订单发布',
         hidden: false,
-        meta: { title: 'erp订单', disabled: false }
+        meta: { title: '工厂ERP订单发布', icon: 'sidebar-order-issue', disabled: false }
       }
     ]
   },

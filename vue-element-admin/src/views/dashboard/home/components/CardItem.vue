@@ -2,7 +2,7 @@
  * @Author: yangdan
  * @Date: 2019-10-15 14:15:54
  * @LastEditors: yangdan
- * @LastEditTime: 2019-10-26 14:48:17
+ * @LastEditTime: 2019-10-29 10:08:27
  * @Description: 添加描述
  -->
 <template>
@@ -54,25 +54,23 @@ export default {
       type: Boolean,
       default: false
     },
-    ExpandTitieState:{
-      type: String,
+    ExpandTitieState: {
+      type: String
     }
   },
   data() {
     return {
-      ExpandTitie:''
+      ExpandTitie: ""
     };
   },
   created() {},
   methods: {
-    ExpandTitieFun(ExpandTitieState){
-    if(parseInt(ExpandTitieState)===1) {
-      return '已安装设备'
-    }
-    else {
-      return '未安装设备'
-    }
-
+    ExpandTitieFun(ExpandTitieState) {
+      if (parseInt(ExpandTitieState) === 1) {
+        return "已安装设备";
+      } else {
+        return "未安装设备";
+      }
     }
   }
 };
@@ -128,6 +126,18 @@ export default {
         padding-bottom: 10px;
       }
     }
+  }
+}
+</style>
+
+// 屏幕适配
+<style  scoped>
+@media (min-width: 320px) and (max-width: 375px) {
+  .card-item-box .card-item .card-item-div .card-item-num {
+    font-size: 35px;
+  }
+   .card-item-box .card-item .card-item-div .card-item-num-Expand {
+    font-size: 35px;
   }
 }
 </style>

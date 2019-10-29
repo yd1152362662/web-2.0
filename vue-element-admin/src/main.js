@@ -2,7 +2,7 @@
  * @Author: yangdan
  * @Date: 2019-09-19 18:20:19
  * @LastEditors: yangdan
- * @LastEditTime: 2019-10-25 15:46:16
+ * @LastEditTime: 2019-10-29 10:44:25
  * @Description: 添加描述
  */
 import Vue from 'vue'
@@ -54,8 +54,9 @@ if (process.env.NODE_ENV === 'production') {
     // 高德key
     key: '9091d50c4c3fb27ab7030f21c9cb60f3',
     // 插件集合 （插件按需引入）
-    plugin: ['AMap.Geocoder','AMap.Geolocation','AMap.Autocomplete', 'AMap.PlaceSearch', 'AMap.Scale', 'AMap.OverView', 'AMap.ToolBar', 'AMap.MapType', 'AMap.PolyEditor', 'AMap.CircleEditor']
+    plugin: ['AMap.Geocoder','AMap.Geolocation','AMap.Autocomplete', 'AMap.PlaceSearch', 'AMap.Scale', 'AMap.OverView', 'AMap.ToolBar', 'AMap.MapType', 'AMap.PolyEditor', 'AMap.CircleEditor','AMap.MarkerClusterer']
   });
+
 
 // // 全局挂载和后端的请求方法和配置属性
 // for (let key in MountFun) {
