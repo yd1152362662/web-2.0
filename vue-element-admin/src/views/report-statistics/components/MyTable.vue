@@ -2,7 +2,7 @@
  * @Author: yangdan
  * @Date: 2019-10-12 10:30:36
  * @LastEditors: yangdan
- * @LastEditTime: 2019-10-30 10:58:48
+ * @LastEditTime: 2019-10-30 10:57:25
  * @Description: 添加描述
  -->
 
@@ -79,7 +79,7 @@
           </template>
         </el-table-column>
       </el-table>
-       <div class="paginationDiv">
+      <div class="paginationDiv">
         <el-pagination
           background
           @size-change="handleSizeChange"
@@ -258,10 +258,7 @@ export default {
   align-items: center;
   padding: 20px 0;
   height: 60px;
-}
-.ReleaseFun {
-  height: 40px;
-  font-size: 14px;
+  color: #333;
 }
 .el-pagination {
   display: flex;
@@ -272,7 +269,6 @@ export default {
 .el-input__inner {
   height: 30px;
 }
-
 .btn-choose {
   width: 40px;
   height: 30px;

@@ -2,7 +2,7 @@
  * @Author: yangdan
  * @Date: 2019-09-19 18:20:19
  * @LastEditors: yangdan
- * @LastEditTime: 2019-10-28 10:17:08
+ * @LastEditTime: 2019-10-30 17:13:16
  * @Description: 添加描述
  -->
 <template>
@@ -43,7 +43,7 @@ export default {
   data() {
     return {
       constantRoutes: constantRoutes,
-      mark: localStorage.getItem('mark'),
+      mark: sessionStorage.getItem('mark'),
       time: true
     };
   },

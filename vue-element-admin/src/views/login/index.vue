@@ -3,7 +3,7 @@
  * @Author: yangdan
  * @Date: 2019-09-19 18:20:19
  * @LastEditors: yangdan
- * @LastEditTime: 2019-10-26 18:11:59
+ * @LastEditTime: 2019-10-30 17:12:32
  * @Description: 添加描述
  -->
 <template>
@@ -249,7 +249,7 @@ export default {
               path: this.redirect || "/"
             });
 
-            localStorage.setItem("mark", "1");
+            sessionStorage.setItem("mark", "1");
             this.loading = false;
           }
           // if (valid) {
@@ -274,7 +274,7 @@ export default {
         this.$refs.loginFormPassword.validate(valid => {
           console.log("valid", valid);
           if (valid) {
-            localStorage.setItem("mark", "2");
+            sessionStorage.setItem("mark", "2");
             this.$router.push({
               path: this.redirect || "/"
             });

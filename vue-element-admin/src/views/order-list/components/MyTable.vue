@@ -2,7 +2,7 @@
  * @Author: yangdan
  * @Date: 2019-10-12 10:30:36
  * @LastEditors: yangdan
- * @LastEditTime: 2019-10-30 10:58:48
+ * @LastEditTime: 2019-10-30 15:28:02
  * @Description: 添加描述
  -->
 
@@ -40,11 +40,7 @@
               <slot :name="item.prop" :obj="scope"></slot>
             </template>-->
             <template slot-scope="scope">
-              <el-tag
-                :color="InitColor(scope.row.state)"
-                style="color:#fff"
-                close-transition
-              >{{InitState(scope.row.state)}}</el-tag>
+              <span :style="{color:InitColor(scope.row.state)}">{{InitState(scope.row.state)}}</span>
             </template>
           </el-table-column>
           <el-table-column
@@ -71,15 +67,16 @@
             <el-button
               v-for="item in table.operation.data"
               :class="item.classname ? item.classname : ''"
-              :key="item.id"
+              :key="item.label"
               :size="item.size"
               :type="item.type"
-              @click.stop="handleOperation(scope.$index, scope.row, item.id)"
+              @click.stop="handleOperation(scope.$index, scope.row, item.label)"
+              :disabled="scope.row.state!==2 && item.label==='签收' "
             >{{ item.label }}</el-button>
           </template>
         </el-table-column>
       </el-table>
-       <div class="paginationDiv">
+      <div class="paginationDiv">
         <el-pagination
           background
           @size-change="handleSizeChange"
@@ -159,10 +156,12 @@ export default {
     handleSelectionChange(val) {
       this.$emit("onHandleSelectionChange", val);
     },
-    handleOperation(a, b, id) {
+    handleOperation(a, b, label) {
       const data = this.table.operation.data;
+      console.log('data', data)
       for (let i = 0; i < data.length; i++) {
-        if (id === data[i].id) {
+        if (label === data[i].label) {
+          console.log('data[i].Fun', data[i].Fun)
           this.$emit(data[i].Fun, a, b);
         }
       }
@@ -226,6 +225,12 @@ export default {
         case 1:
           return "运输中";
           break;
+        case 2:
+          return "待签收";
+          break;
+        case 3:
+          return "已完成";
+          break;
         default:
           return "其他状态";
       }
@@ -233,13 +238,19 @@ export default {
     InitColor(val) {
       switch (val) {
         case 0:
-          return "blue";
+          return "#FE3A2E";
           break;
         case 1:
-          return "orange";
+          return "#248BF2";
+          break;
+        case 2:
+          return "#FFCC42";
+          break;
+        case 3:
+          return "#80D748";
           break;
         default:
-          return "red";
+          return "#ccc";
       }
     },
     tableHeaderColor({ row, column, rowIndex, columnIndex }) {
@@ -293,5 +304,10 @@ export default {
   >>> .el-pagination__total {
     margin: 0 14px !important;
   }
+}
+
+.el-button--primary.is-disabled {
+  background-color: #ccc;
+  border-color: #ccc;
 }
 </style>

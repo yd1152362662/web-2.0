@@ -2,7 +2,7 @@
  * @Author: yangdan
  * @Date: 2019-10-25 15:02:04
  * @LastEditors: yangdan
- * @LastEditTime: 2019-10-29 17:44:02
+ * @LastEditTime: 2019-10-30 09:51:39
  * @Description: 添加描述
  -->
 <template>
@@ -51,8 +51,8 @@ export default {
       address: "",
       lng: 0,
       lat: 0,
-      src:require('../../assets/amap/carSelect.png'),
-      src2: require('../../assets/amap/car.png'),
+      src: require("../../assets/amap/carSelect.png"),
+      src2: require("../../assets/amap/car.png"),
       datas: [
         {
           id: 0,
@@ -118,7 +118,7 @@ export default {
         },
         {
           position: [121.5253184, 31.21515044],
-                   content: `<div class="amap-message-window">
+          content: `<div class="amap-message-window">
                         <ul>
                            <li>
                            <span>姓名：</span>
@@ -160,7 +160,7 @@ export default {
         },
         {
           position: [121.5253184, 31.21315044],
-                   content: `<div class="amap-message-window">
+          content: `<div class="amap-message-window">
                         <ul>
                            <li>
                            <span>姓名：</span>
@@ -197,7 +197,7 @@ export default {
                             <span>查看详情</span>
                           </div>
                      </div>`,
-         offset: [150, -35],
+          offset: [150, -35],
           visible: false
         }
       ],
@@ -231,13 +231,13 @@ export default {
           if (self.clickedMarker) {
             // 先恢复上次点击的Marker的样式
 
-            self.clickedMarker.setOffset(new AMap.Pixel(-10, -30));
+            // self.clickedMarker.setOffset(new AMap.Pixel(-10, -30));
             self.clickedMarker.setContent(
               self.getMarkerContent(self.clickedMarker.getExtData(), 100, 100)
             );
           }
           e.target.setContent(self.getMarkerContent(data, 100, 100, true));
-          e.target.setOffset(new AMap.Pixel(-18, -50));
+          // e.target.setOffset(new AMap.Pixel(-18, -50));
           self.clickedMarker = e.target;
         }
       },
@@ -254,6 +254,7 @@ export default {
     getMarkerContent(item, width, height, isRotate = false) {
       let srcxxx = isRotate ? this.src : this.src2;
       const content = `<div>
+
                             <img src=${srcxxx} style="width:${width}px;height:${height}px"/>
                             <div style="margin-top:-40px;text-align:center;color:#fff">贵A1234${item.title}</div>
                       </div>`;
@@ -296,7 +297,7 @@ export default {
         color: #333;
         font-size: 16px;
       }
-       span:nth-of-type(2) {
+      span:nth-of-type(2) {
         font-size: 14px;
       }
     }
@@ -308,15 +309,18 @@ export default {
   justify-content: center;
   align-items: center;
   padding-top: 5px;
+  position: relative;
   span {
-    width:100px;
-    height:32px;
-    background-color:#248BF2;
-    line-height:32px;
-    text-align:center;
-    border-radius:2px;
-    color:#fff;
+    width: 100px;
+    height: 32px;
+    background-color: #248bf2;
+    line-height: 32px;
+    text-align: center;
+    border-radius: 2px;
+    color: #fff;
   }
 }
+
+
 </style>
 

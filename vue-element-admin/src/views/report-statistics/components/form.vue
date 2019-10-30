@@ -2,7 +2,7 @@
  * @Author: yangdan
  * @Date: 2019-10-12 15:31:58
  * @LastEditors: yangdan
- * @LastEditTime: 2019-10-30 16:34:30
+ * @LastEditTime: 2019-10-30 16:33:54
  * @Description: 添加描述
  -->
 <template>
@@ -19,7 +19,7 @@
 
         <el-form-item
           v-for="(item) in formConfig.formItemList"
-          :key="item.prop"
+          :key="item.label"
           :label="item.label"
           :prop="item.prop"
         >
@@ -79,6 +79,8 @@
       :icon="item.icon"
       @click="item.handleClick"
       style="margin-left:20px;width:100px"
+      :class="item.className"
+      :plain="item.plain"
     >{{item.name}}</el-button>
   </el-form>
 </template>
