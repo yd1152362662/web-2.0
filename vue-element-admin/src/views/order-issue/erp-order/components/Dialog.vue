@@ -2,7 +2,7 @@
  * @Author: yangdan
  * @Date: 2019-10-25 14:26:08
  * @LastEditors: yangdan
- * @LastEditTime: 2019-10-25 14:56:07
+ * @LastEditTime: 2019-10-31 18:03:02
  * @Description: 添加描述
  -->
 
@@ -13,6 +13,8 @@
       :visible.sync="visible"
       @close="$emit('update:show', false)"
       :show="show"
+      center
+      top='8vh'
     >
       <slot></slot>
 
@@ -45,12 +47,12 @@ export default {
       this.visible = this.show;
     }
   },
-  methods:{
-    cancel(){
+  methods: {
+    cancel() {
       this.$emit("cancel");
     },
     OK() {
-       this.$emit("OK");
+      this.$emit("OK");
     }
   }
 };

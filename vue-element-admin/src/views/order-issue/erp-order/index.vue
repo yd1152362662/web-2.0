@@ -2,7 +2,7 @@
  * @Author: yangdan
  * @Date: 2019-09-19 18:20:19
  * @LastEditors: yangdan
- * @LastEditTime: 2019-10-28 14:53:32
+ * @LastEditTime: 2019-10-31 18:01:42
  * @Description: 添加描述
  -->
 <template>
@@ -22,7 +22,151 @@
         ></MyTable>
 
         <!-- 弹框 -->
-        <Dialog :show.sync="dialogTableVisible" title="订单发布" @cancel="cancel" @OK="OK">示例弹框</Dialog>
+        <Dialog
+          :show.sync="dialogTableVisible"
+          title="订单发布"
+          class="ReleaseDiaog"
+          @cancel="cancel"
+          @OK="OK"
+        >
+          <el-row>
+            <el-col :span="8" style="padding:0 60px;">
+              <p>
+                <span>货物名称：</span>
+                <span>石将军牌水泥</span>
+              </p>
+              <p>
+                <span>货物类型：</span>
+                <span>PC32.5袋装</span>
+              </p>
+              <p>
+                <span>货物重量：</span>
+                <span>20吨</span>
+              </p>
+              <p>
+                <span>创建时间：</span>
+                <span>2019-10-26</span>
+              </p>
+            </el-col>
+            <el-col :span="16">
+              <p>
+                <span>司机姓名：</span>
+                <span>张大宝</span>
+              </p>
+              <p>
+                <span>联系方式：</span>
+                <span>13323233232</span>
+              </p>
+              <p>
+                <span>车牌号码：</span>
+                <span>贵A12121</span>
+              </p>
+              <p>
+                <span>装货地址：</span>
+                <span>贵州省铜仁市思南县贵州沿河西南水泥有限公司</span>
+              </p>
+            </el-col>
+          </el-row>
+          <Title :title="'收货人信息'">
+            <el-form :inline="true">
+              <el-row>
+                <el-col :span="8">
+                  <el-form-item label="收货人姓名">
+                    <el-input placeholder="请输入货物名称"></el-input>
+                  </el-form-item>
+                </el-col>
+                <el-col :span="8">
+                  <el-form-item label="收货地址">
+                    <el-select placeholder="请选择">
+                      <el-option label="pc32.5" value="pc32.5"></el-option>
+                      <el-option label="pc42.5" value="pc42.5"></el-option>
+                    </el-select>
+                  </el-form-item>
+                </el-col>
+              </el-row>
+              <el-row>
+                <el-col :span="8">
+                  <el-form-item label="收货人电话">
+                    <el-input placeholder="请输入收货人电话"></el-input>
+                  </el-form-item>
+                </el-col>
+                <el-col :span="8">
+                  <el-form-item label="详细地址">
+                    <el-input placeholder="请输入详细地址"></el-input>
+                  </el-form-item>
+                </el-col>
+              </el-row>
+            </el-form>
+          </Title>
+          <Title :title="'时间要求'">
+            <el-form :inline="true">
+              <el-row>
+                <el-col :span="8">
+                  <el-form-item label="装货时间">
+                    <el-date-picker type="date" placeholder="选择日期"></el-date-picker>
+                  </el-form-item>
+                </el-col>
+                <el-col :span="8">
+                  <el-form-item label="收货时间">
+                    <el-date-picker type="date" placeholder="选择日期"></el-date-picker>
+                  </el-form-item>
+                </el-col>
+              </el-row>
+            </el-form>
+          </Title>
+          <Title :title="'运输要求'" :titleState="1">
+            <el-form :inline="true">
+              <el-row>
+                <el-col :span="8">
+                  <el-form-item label="装卸需求">
+                    <el-select placeholder="请选择">
+                      <el-option label="pc32.5" value="pc32.5"></el-option>
+                      <el-option label="pc42.5" value="pc42.5"></el-option>
+                    </el-select>
+                  </el-form-item>
+                </el-col>
+                <el-col :span="8">
+                  <el-form-item label="订单模式">
+                    <el-select placeholder="请选择">
+                      <el-option label="pc32.5" value="pc32.5"></el-option>
+                      <el-option label="pc42.5" value="pc42.5"></el-option>
+                    </el-select>
+                  </el-form-item>
+                </el-col>
+                <el-col :span="8">
+                  <el-form-item label="回单">
+                    <el-select placeholder="请选择">
+                      <el-option label="pc32.5" value="pc32.5"></el-option>
+                      <el-option label="pc42.5" value="pc42.5"></el-option>
+                    </el-select>
+                  </el-form-item>
+                </el-col>
+              </el-row>
+              <el-row>
+                <el-col :span="8">
+                  <el-form-item label="运费">
+                    <el-input placeholder="请输入货物名称"></el-input>
+                  </el-form-item>
+                </el-col>
+                <el-col :span="8">
+                  <el-form-item label="结算方式">
+                    <el-select placeholder="请选择">
+                      <el-option label="pc32.5" value="pc32.5"></el-option>
+                      <el-option label="pc42.5" value="pc42.5"></el-option>
+                    </el-select>
+                  </el-form-item>
+                </el-col>
+              </el-row>
+            </el-form>
+          </Title>
+          <Title :title="'备注'" :titleState="1">
+            <el-row>
+              <el-col :span="8">
+                <el-input type="textarea"></el-input>
+              </el-col>
+            </el-row>
+          </Title>
+        </Dialog>
       </div>
     </div>
   </div>
@@ -32,13 +176,15 @@
 import MyTable from "./components/MyTable";
 import searchForm from "./components/form";
 import Dialog from "./components/Dialog";
+import Title from "./components/title";
 
 export default {
   name: "Tab",
   components: {
     MyTable,
     searchForm,
-    Dialog
+    Dialog,
+    Title
   },
   data() {
     return {
@@ -210,13 +356,13 @@ export default {
         ],
         operate: [
           {
-            id:1,
+            id: 1,
             type: "primary",
             name: "查询",
             handleClick: this.search
           },
           {
-            id:2,
+            id: 2,
             name: "重置",
             handleClick: this.search
           }
@@ -328,8 +474,22 @@ export default {
 };
 </script>
 
-<style scoped>
+<style lang="scss" scoped>
 .MyTable {
   padding-top: 15px;
+}
+.ReleaseDiaog {
+  >>> .el-dialog {
+    border-radius: 10px;
+  }
+    >>> .el-form {
+    padding: 10px 0 0 0;
+  }
+  >>> .el-form-item {
+    margin-bottom:10px;
+  }
+  >>> .el-input  {
+    width: 184px;
+  }
 }
 </style>

@@ -2,7 +2,7 @@
  * @Author: yangdan
  * @Date: 2019-09-19 18:20:19
  * @LastEditors: yangdan
- * @LastEditTime: 2019-10-30 17:34:36
+ * @LastEditTime: 2019-10-31 17:15:23
  * @Description: 添加描述
  */
 import Vue from 'vue';
@@ -102,7 +102,7 @@ export const constantRoutes = [{
   alwaysShow: true,
   children: [{
     path: 'orderIssue1',
-    component: () => import('@/views/dashboard/index'),
+    component: () => import('@/views/order-issue/create-order'),
     name: '创建订单',
     hidden: false,
     meta: {

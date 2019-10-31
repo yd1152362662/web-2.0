@@ -2,7 +2,7 @@
  * @Author: yangdan
  * @Date: 2019-09-19 18:20:19
  * @LastEditors: yangdan
- * @LastEditTime: 2019-10-30 15:23:59
+ * @LastEditTime: 2019-10-31 15:30:31
  * @Description: 添加描述
  -->
 <template>
@@ -383,6 +383,27 @@ export default {
     button:nth-of-type(1) {
       margin-right: 50px;
     }
+  }
+}
+</style>
+
+// 屏幕适配
+<style >
+@media (width: 320px) {
+  /* 时间选择样式 */
+  .el-range-editor.el-input__inner {
+    width: 200px;
+  }
+}
+@media (min-width: 320px) and (max-width: 500px) {
+  /* 时间选择样式 */
+  .el-range-editor.el-input__inner {
+    width: 180px;
+  }
+
+  .el-select .el-input__inner,
+  .el-input {
+    width: 180px;
   }
 }
 </style>
