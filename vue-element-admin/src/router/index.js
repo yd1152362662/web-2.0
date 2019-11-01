@@ -2,7 +2,7 @@
  * @Author: yangdan
  * @Date: 2019-09-19 18:20:19
  * @LastEditors: yangdan
- * @LastEditTime: 2019-10-31 17:15:23
+ * @LastEditTime: 2019-11-01 09:44:25
  * @Description: 添加描述
  */
 import Vue from 'vue';
@@ -193,6 +193,23 @@ export const constantRoutes = [{
     name: 'Profile',
     meta: {
       title: 'Profile',
+      icon: 'user',
+      noCache: true
+    }
+  }]
+},
+
+{
+  path: '/details',
+  component: Layout,
+  redirect: '/details/index',
+  hidden: true,
+  children: [{
+    path: 'index',
+    component: () => import('@/views/details/index'),
+    name: 'details',
+    meta: {
+      title: '详情',
       icon: 'user',
       noCache: true
     }
