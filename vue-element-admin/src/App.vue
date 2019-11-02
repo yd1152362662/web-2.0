@@ -2,18 +2,37 @@
  * @Author: yangdan
  * @Date: 2019-09-19 18:20:19
  * @LastEditors: yangdan
- * @LastEditTime: 2019-10-30 16:26:01
+ * @LastEditTime: 2019-11-02 17:30:34
  * @Description: 添加描述
  -->
 <template>
   <div id="app">
-    <router-view />
+    <router-view v-if="isRouterAlive" />
   </div>
 </template>
 
 <script>
 export default {
-  name: "App"
+  name: "App",
+  provide() {
+    //父组件中通过provide来提供变量，在子组件中通过inject来注入变量。
+    return {
+      reload: this.reload
+    };
+  },
+  data() {
+    return {
+      isRouterAlive: true
+    };
+  },
+  methods: {
+    reload() {
+      this.isRouterAlive = false;
+      this.$nextTick(function() {
+        this.isRouterAlive = true;
+      });
+    }
+  }
 };
 </script>
 

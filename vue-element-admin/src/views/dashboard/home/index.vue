@@ -2,7 +2,7 @@
  * @Author: yangdan
  * @Date: 2019-10-15 14:10:17
  * @LastEditors: yangdan
- * @LastEditTime: 2019-10-29 10:06:10
+ * @LastEditTime: 2019-11-02 09:47:27
  * @Description: 添加描述
  -->
 <template>
@@ -39,7 +39,7 @@
       <el-row>
         <p style="padding-top:10px">近7天发布订单对比</p>
         <el-col :span="24">
-          <LineChart :chartData="chartData"></LineChart>
+          <LineChart  :chartData="chartData"></LineChart>
         </el-col>
       </el-row>
     </div>
