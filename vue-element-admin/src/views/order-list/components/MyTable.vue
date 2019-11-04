@@ -2,7 +2,7 @@
  * @Author: yangdan
  * @Date: 2019-10-12 10:30:36
  * @LastEditors: yangdan
- * @LastEditTime: 2019-10-30 15:28:02
+ * @LastEditTime: 2019-11-04 10:47:15
  * @Description: 添加描述
  -->
 
@@ -11,6 +11,7 @@
     <template :table="table">
       <el-table
         v-loading="table.loading"
+         element-loading-background="rgb(255, 255, 255)"
         :show-summary="table.hasShowSummary"
         :summary-method="table.getSummaries"
         ref="TlRlTable"
@@ -150,7 +151,7 @@ export default {
           }
         };
       }
-    }
+    },
   },
   methods: {
     handleSelectionChange(val) {

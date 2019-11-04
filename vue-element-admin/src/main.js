@@ -2,7 +2,7 @@
  * @Author: yangdan
  * @Date: 2019-09-19 18:20:19
  * @LastEditors: yangdan
- * @LastEditTime: 2019-10-29 10:44:25
+ * @LastEditTime: 2019-11-04 09:46:38
  * @Description: 添加描述
  */
 import Vue from 'vue';
@@ -26,6 +26,10 @@ import './icons'; // icon
 import './permission'; // permission control
 import './utils/error-log'; // error log
 // import _ from 'lodash';
+
+// 全局loading
+import Loading from './components/loading/loading.js';
+Vue.use(Loading);
 
 import * as filters from './filters'; // global filters
 

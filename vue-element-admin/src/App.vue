@@ -2,7 +2,7 @@
  * @Author: yangdan
  * @Date: 2019-09-19 18:20:19
  * @LastEditors: yangdan
- * @LastEditTime: 2019-11-02 17:30:34
+ * @LastEditTime: 2019-11-04 10:43:32
  * @Description: 添加描述
  -->
 <template>
@@ -128,6 +128,23 @@ export default {
 .el-button {
   height: 40px;
   font-size: 14px;
+}
+
+
+/* loading */
+
+.el-loading-spinner {
+  background: url('./assets/loading/loading.gif') no-repeat;
+  background-size: 210px 110px;
+  width: 100%;
+  height: 100%;
+  position: relative;
+  top: 50%;
+  left: 45%;
+}
+
+.el-loading-spinner svg {
+  display: none;
 }
 </style>
 

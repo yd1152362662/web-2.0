@@ -2,7 +2,7 @@
  * @Author: yangdan
  * @Date: 2019-09-19 18:20:19
  * @LastEditors: yangdan
- * @LastEditTime: 2019-10-31 15:30:31
+ * @LastEditTime: 2019-11-04 10:48:33
  * @Description: 添加描述
  -->
 <template>
@@ -53,6 +53,7 @@
 import MyTable from "./components/MyTable";
 import searchForm from "./components/form";
 import Dialog from "./components/Dialog";
+import { setTimeout } from 'timers';
 
 export default {
   name: "Tab",
@@ -217,7 +218,8 @@ export default {
           currentPage: 1,
           size: 10,
           total: 40
-        }
+        },
+        loading:true
       },
       // form的数据和配置
       formConfig: {
@@ -298,7 +300,8 @@ export default {
       dialogTableVisible: false,
       orderNumDialog: "",
       plateNumberDialog: "",
-      driverDialog: ""
+      driverDialog: "",
+
     };
   },
   watch: {},
@@ -340,6 +343,11 @@ export default {
       console.log("确认了");
       this.dialogTableVisible = false;
     }
+  },
+  mounted() {
+    setTimeout(()=>{
+      this.dataTable.loading=false;
+    },3000)
   }
 };
 </script>
