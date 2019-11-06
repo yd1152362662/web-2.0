@@ -3,7 +3,7 @@
  * @Author: yangdan
  * @Date: 2019-09-19 18:20:19
  * @LastEditors: yangdan
- * @LastEditTime: 2019-10-30 17:12:32
+ * @LastEditTime: 2019-11-06 15:18:33
  * @Description: 添加描述
  -->
 <template>
@@ -120,18 +120,18 @@
 // import { validUsername } from "@/utils/validate";
 
 export default {
-  name: 'Login',
+  name: "Login",
   data() {
     const validateUsername = (rule, value, callback) => {
       if (!value) {
-        callback(new Error('请输入用户名'));
+        callback(new Error("请输入用户名"));
       } else {
         callback();
       }
     };
     const validatePassword = (rule, value, callback) => {
       if (value.length < 6) {
-        callback(new Error('密码的长度为6位'));
+        callback(new Error("密码的长度为6位"));
       } else {
         callback();
       }
@@ -139,7 +139,7 @@ export default {
 
     const validatePhone = (rule, value, callback) => {
       if (value.length !== 11) {
-        callback(new Error('手机号的长度为11位'));
+        callback(new Error("手机号的长度为11位"));
       } else {
         callback();
       }
@@ -147,7 +147,7 @@ export default {
 
     const validateVerificationCode = (rule, value, callback) => {
       if (value.length < 6) {
-        callback(new Error('验证码的长度为6位'));
+        callback(new Error("验证码的长度为6位"));
       } else {
         callback();
       }
@@ -155,33 +155,33 @@ export default {
 
     return {
       loginForm: {
-        username: '',
-        password: '',
-        phone: '',
-        verificationCode: '',
-        type: '1'
+        username: "",
+        password: "",
+        phone: "",
+        verificationCode: "",
+        type: "1"
       },
       loginRules: {
         username: [
-          { required: true, trigger: 'blur', validator: validateUsername }
+          { required: true, trigger: "blur", validator: validateUsername }
         ],
         password: [
-          { required: true, trigger: 'blur', validator: validatePassword }
+          { required: true, trigger: "blur", validator: validatePassword }
         ],
-        phone: [{ required: true, trigger: 'blur', validator: validatePhone }],
+        phone: [{ required: true, trigger: "blur", validator: validatePhone }],
         verificationCode: [
           {
             required: true,
-            trigger: 'blur',
+            trigger: "blur",
             validator: validateVerificationCode
           }
         ]
       },
-      passwordType: 'password',
+      passwordType: "password",
       loading: false,
       redirect: undefined,
       otherQuery: {},
-      VerificationCodeText: '获取验证码',
+      VerificationCodeText: "获取验证码",
       CodeDisabled: false,
       time: 4
     };
@@ -190,10 +190,10 @@ export default {
     $route: {
       handler: function(route) {
         const query = route.query;
-        console.log('query', query);
+        console.log("query", query);
         if (query) {
-          this.redirect = '';
-          this.otherQuery = '';
+          this.redirect = "";
+          this.otherQuery = "";
         }
       },
       immediate: true
@@ -203,9 +203,9 @@ export default {
     // window.addEventListener('storage', this.afterQRScan)
   },
   mounted() {
-    if (this.loginForm.username === '') {
+    if (this.loginForm.username === "") {
       this.$refs.username.focus();
-    } else if (this.loginForm.password === '') {
+    } else if (this.loginForm.password === "") {
       this.$refs.password.focus();
     }
 
@@ -229,10 +229,10 @@ export default {
   methods: {
     // 点击是否显示密码
     showPwd() {
-      if (this.passwordType === 'password') {
-        this.passwordType = '';
+      if (this.passwordType === "password") {
+        this.passwordType = "";
       } else {
-        this.passwordType = 'password';
+        this.passwordType = "password";
       }
       this.$nextTick(() => {
         this.$refs.password.focus();
@@ -240,14 +240,14 @@ export default {
     },
     // 点击登录
     handleLogin() {
-      console.log('this.form', this.loginForm);
+      console.log("this.form", this.loginForm);
       if (parseInt(this.loginForm.type) === 1) {
         this.$refs.loginFormPhone.validate(valid => {
-          console.log('valid', valid);
+          console.log("valid", valid);
           if (valid) {
-            sessionStorage.setItem('mark', '1');
+            sessionStorage.setItem("mark", "1");
             this.$router.push({
-              path: this.redirect || '/'
+              path: this.redirect || "/"
             });
 
             this.loading = false;
@@ -272,11 +272,11 @@ export default {
         });
       } else {
         this.$refs.loginFormPassword.validate(valid => {
-          console.log('valid', valid);
+          console.log("valid", valid);
           if (valid) {
-            sessionStorage.setItem('mark', '2');
+            sessionStorage.setItem("mark", "2");
             this.$router.push({
-              path: this.redirect || '/'
+              path: this.redirect || "/"
             });
             this.loading = false;
           }
@@ -286,18 +286,18 @@ export default {
     // 点击tab进行改变
     handleClick(tab, event) {
       this.loginForm.type = tab.name;
-      console.log('tab', tab.name);
+      console.log("tab", tab.name);
     },
     // 点击获取验证码
     HandleVerificationCode() {
-      console.log('点击获取验证码');
+      console.log("点击获取验证码");
       this.CodeDisabled = true;
       var CodeDisabledTimer = setInterval(() => {
         this.time = this.time - 1;
         this.VerificationCodeText = `${this.time}s`;
         if (this.time < 0) {
           clearInterval(CodeDisabledTimer);
-          this.VerificationCodeText = '获取验证码';
+          this.VerificationCodeText = "获取验证码";
           this.CodeDisabled = false;
           this.time = 4;
         }
@@ -323,6 +323,8 @@ $cursor: #fff;
 
 /* reset element-ui css */
 .login-container {
+  background:  url("../../assets/login/login-bg.png");
+  background-size: 100% 100%;
   .el-input {
     display: inline-block;
     height: 47px;
@@ -346,6 +348,8 @@ $cursor: #fff;
     }
   }
 }
+
+
 </style>
 
 <style lang="scss" scoped>
@@ -361,7 +365,6 @@ $light_gray: #eee;
 .login-container {
   min-height: 100%;
   width: 100%;
-  background-color: #ddd;
   overflow: hidden;
   position: relative;
 
@@ -387,6 +390,7 @@ $light_gray: #eee;
     height: 400px;
     border-radius: 10px;
     position: relative;
+    top: -30px;
     box-shadow: 0 25px 40px rgba(191, 221, 251, 0.5);
     @include flex;
 
