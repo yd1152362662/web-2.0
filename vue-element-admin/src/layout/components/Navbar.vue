@@ -2,7 +2,7 @@
  * @Author: yangdan
  * @Date: 2019-09-19 18:20:19
  * @LastEditors: yangdan
- * @LastEditTime: 2019-10-26 14:51:17
+ * @LastEditTime: 2019-11-13 11:00:03
  * @Description: 添加描述
  -->
 <template>
@@ -17,7 +17,7 @@
 
     <div class="right-menu">
       <template>
-        <svg-icon icon-class="bug" />
+        <svg-icon icon-class="small-heade-photo" style="width:24px;height:24px" />
         <span style="font-size:15px;color:#333">欢迎XXX登录哆啦快运货主版</span>
         <el-button size="mini" @click="logout">退出</el-button>
       </template>
@@ -91,6 +91,18 @@ export default {
     height: 100%;
     line-height: 64px;
     padding-right: 20px;
+    display: flex;
+    align-items: center;
+    svg {
+      margin-right: 7px;
+    }
+    span {
+      margin-right: 10px;
+    }
+    button {
+      width: 60px;
+      height: 30px;
+    }
 
     &:focus {
       outline: none;

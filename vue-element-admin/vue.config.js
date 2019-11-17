@@ -2,7 +2,7 @@
  * @Author: yangdan
  * @Date: 2019-09-19 18:18:51
  * @LastEditors: yangdan
- * @LastEditTime: 2019-10-22 10:33:03
+ * @LastEditTime: 2019-11-12 15:19:26
  * @Description: 添加描述
  */
 'use strict'
@@ -18,7 +18,9 @@ const name = defaultSettings.title || 'vue Element Admin' // page title
 // use administrator privileges to execute the command line.
 // For example, Mac: sudo npm run
 const port = 9527 // dev port
-
+const BASE_URL = process.env.NODE_ENV === 'production'
+  ? './'
+  : './'
 // All configuration item explanations can be find in https://cli.vuejs.org/config/
 module.exports = {
   /**

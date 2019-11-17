@@ -2,7 +2,7 @@
  * @Author: yangdan
  * @Date: 2019-09-19 18:20:19
  * @LastEditors: yangdan
- * @LastEditTime: 2019-10-31 18:01:42
+ * @LastEditTime: 2019-11-11 15:53:55
  * @Description: 添加描述
  -->
 <template>
@@ -30,7 +30,7 @@
           @OK="OK"
         >
           <el-row>
-            <el-col :span="8" style="padding:0 60px;">
+            <el-col :xs="24" :sm="24" :md="10" :lg="11" class="ReleaseDiaog-col">
               <p>
                 <span>货物名称：</span>
                 <span>石将军牌水泥</span>
@@ -48,7 +48,7 @@
                 <span>2019-10-26</span>
               </p>
             </el-col>
-            <el-col :span="16">
+            <el-col :xs="24" :sm="24" :md="14" :lg="13">
               <p>
                 <span>司机姓名：</span>
                 <span>张大宝</span>
@@ -70,12 +70,12 @@
           <Title :title="'收货人信息'">
             <el-form :inline="true">
               <el-row>
-                <el-col :span="8">
+                <el-col :xs="24" :sm="24" :md="8" :lg="8">
                   <el-form-item label="收货人姓名">
                     <el-input placeholder="请输入货物名称"></el-input>
                   </el-form-item>
                 </el-col>
-                <el-col :span="8">
+                <el-col :xs="24" :sm="24" :md="8" :lg="8">
                   <el-form-item label="收货地址">
                     <el-select placeholder="请选择">
                       <el-option label="pc32.5" value="pc32.5"></el-option>
@@ -85,12 +85,12 @@
                 </el-col>
               </el-row>
               <el-row>
-                <el-col :span="8">
+                <el-col :xs="24" :sm="24" :md="8" :lg="8">
                   <el-form-item label="收货人电话">
                     <el-input placeholder="请输入收货人电话"></el-input>
                   </el-form-item>
                 </el-col>
-                <el-col :span="8">
+                <el-col :xs="24" :sm="24" :md="8" :lg="8">
                   <el-form-item label="详细地址">
                     <el-input placeholder="请输入详细地址"></el-input>
                   </el-form-item>
@@ -101,12 +101,12 @@
           <Title :title="'时间要求'">
             <el-form :inline="true">
               <el-row>
-                <el-col :span="8">
+                <el-col :xs="24" :sm="24" :md="8" :lg="8">
                   <el-form-item label="装货时间">
                     <el-date-picker type="date" placeholder="选择日期"></el-date-picker>
                   </el-form-item>
                 </el-col>
-                <el-col :span="8">
+                <el-col :xs="24" :sm="24" :md="8" :lg="8">
                   <el-form-item label="收货时间">
                     <el-date-picker type="date" placeholder="选择日期"></el-date-picker>
                   </el-form-item>
@@ -117,7 +117,7 @@
           <Title :title="'运输要求'" :titleState="1">
             <el-form :inline="true">
               <el-row>
-                <el-col :span="8">
+                <el-col :xs="24" :sm="24" :md="8" :lg="8">
                   <el-form-item label="装卸需求">
                     <el-select placeholder="请选择">
                       <el-option label="pc32.5" value="pc32.5"></el-option>
@@ -125,7 +125,7 @@
                     </el-select>
                   </el-form-item>
                 </el-col>
-                <el-col :span="8">
+                <el-col :xs="24" :sm="24" :md="8" :lg="8">
                   <el-form-item label="订单模式">
                     <el-select placeholder="请选择">
                       <el-option label="pc32.5" value="pc32.5"></el-option>
@@ -133,7 +133,7 @@
                     </el-select>
                   </el-form-item>
                 </el-col>
-                <el-col :span="8">
+                <el-col :xs="24" :sm="24" :md="8" :lg="8">
                   <el-form-item label="回单">
                     <el-select placeholder="请选择">
                       <el-option label="pc32.5" value="pc32.5"></el-option>
@@ -143,12 +143,12 @@
                 </el-col>
               </el-row>
               <el-row>
-                <el-col :span="8">
+                <el-col :xs="24" :sm="24" :md="8" :lg="8">
                   <el-form-item label="运费">
                     <el-input placeholder="请输入货物名称"></el-input>
                   </el-form-item>
                 </el-col>
-                <el-col :span="8">
+                <el-col :xs="24" :sm="24" :md="8" :lg="8">
                   <el-form-item label="结算方式">
                     <el-select placeholder="请选择">
                       <el-option label="pc32.5" value="pc32.5"></el-option>
@@ -161,7 +161,7 @@
           </Title>
           <Title :title="'备注'" :titleState="1">
             <el-row>
-              <el-col :span="8">
+              <el-col :xs="24" :sm="24" :md="8" :lg="8">
                 <el-input type="textarea"></el-input>
               </el-col>
             </el-row>
@@ -475,21 +475,5 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-.MyTable {
-  padding-top: 15px;
-}
-.ReleaseDiaog {
-  >>> .el-dialog {
-    border-radius: 10px;
-  }
-    >>> .el-form {
-    padding: 10px 0 0 0;
-  }
-  >>> .el-form-item {
-    margin-bottom:10px;
-  }
-  >>> .el-input  {
-    width: 184px;
-  }
-}
+@import "./index.scss";
 </style>

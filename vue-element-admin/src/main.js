@@ -2,7 +2,7 @@
  * @Author: yangdan
  * @Date: 2019-09-19 18:20:19
  * @LastEditors: yangdan
- * @LastEditTime: 2019-11-04 09:46:38
+ * @LastEditTime: 2019-11-12 09:42:24
  * @Description: 添加描述
  */
 import Vue from 'vue';
@@ -35,6 +35,13 @@ import * as filters from './filters'; // global filters
 
 import VueAMap from 'vue-amap';
 Vue.use(VueAMap);
+// 初始化vue-amap
+VueAMap.initAMapApiLoader({
+  // 高德key
+  key: '9091d50c4c3fb27ab7030f21c9cb60f3',
+  // 插件集合 （插件按需引入）
+  plugin: ['AMap.Geocoder', 'AMap.Geolocation', 'AMap.Autocomplete', 'AMap.PlaceSearch', 'AMap.Scale', 'AMap.OverView', 'AMap.ToolBar', 'AMap.MapType', 'AMap.PolyEditor', 'AMap.CircleEditor', 'AMap.MarkerClusterer']
+});
 
 /**
  * If you don't want to use mock-server
@@ -51,13 +58,7 @@ if (process.env.NODE_ENV === 'production') {
   mockXHR();
 }
 
-// 初始化vue-amap
-VueAMap.initAMapApiLoader({
-  // 高德key
-  key: '9091d50c4c3fb27ab7030f21c9cb60f3',
-  // 插件集合 （插件按需引入）
-  plugin: ['AMap.Geocoder', 'AMap.Geolocation', 'AMap.Autocomplete', 'AMap.PlaceSearch', 'AMap.Scale', 'AMap.OverView', 'AMap.ToolBar', 'AMap.MapType', 'AMap.PolyEditor', 'AMap.CircleEditor', 'AMap.MarkerClusterer']
-});
+
 
 Vue.use(Element, {
   size: Cookies.get('size') || 'medium' // set element-ui default size

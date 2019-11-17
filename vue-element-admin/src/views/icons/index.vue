@@ -13,7 +13,7 @@
     </aside>
     <el-tabs type="border-card">
       <el-tab-pane label="Icons">
-        <div v-for="item of svgIcons" :key="item" @click="handleClipboard(generateIconCode(item),$event)">
+        <div v-for="item of svgIcons" :key="item" effect="light" @click="handleClipboard(generateIconCode(item),$event)">
           <el-tooltip placement="top">
             <div slot="content">
               {{ generateIconCode(item) }}
@@ -26,7 +26,7 @@
         </div>
       </el-tab-pane>
       <el-tab-pane label="Element-UI Icons">
-        <div v-for="item of elementIcons" :key="item" @click="handleClipboard(generateElementIconCode(item),$event)">
+        <div v-for="item of elementIcons" :key="item" effect="light" @click="handleClipboard(generateElementIconCode(item),$event)">
           <el-tooltip placement="top">
             <div slot="content">
               {{ generateElementIconCode(item) }}

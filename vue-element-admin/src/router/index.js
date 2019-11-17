@@ -2,7 +2,7 @@
  * @Author: yangdan
  * @Date: 2019-09-19 18:20:19
  * @LastEditors: yangdan
- * @LastEditTime: 2019-11-02 09:17:50
+ * @LastEditTime: 2019-11-13 11:32:11
  * @Description: 添加描述
  */
 import Vue from "vue";
@@ -113,7 +113,7 @@ export const constantRoutes = [
         hidden: false,
         meta: {
           title: "创建订单",
-          icon: "sidebar-order-issue",
+          icon: "sidebar-order-issue-create",
           disabled: false
         }
       },
@@ -124,7 +124,7 @@ export const constantRoutes = [
         hidden: false,
         meta: {
           title: "工厂ERP订单发布",
-          icon: "sidebar-order-issue",
+          icon: "sidebar-order-issue-erp",
           disabled: false
         }
       }
@@ -188,7 +188,7 @@ export const constantRoutes = [
         name: "已完成订单明细 ",
         meta: {
           title: "已完成订单明细",
-          icon: "sidebar-order-issue"
+          icon: "sidebar-report-completed"
         }
       }
     ]
@@ -315,7 +315,7 @@ export const asyncRoutes = [
 
 const createRouter = () =>
   new Router({
-    // mode: 'history', // require service support
+    mode: 'history', // require service support
     scrollBehavior: () => ({
       y: 0
     }),

@@ -2,7 +2,7 @@
  * @Author: yangdan
  * @Date: 2019-09-19 18:20:19
  * @LastEditors: yangdan
- * @LastEditTime: 2019-11-04 10:43:32
+ * @LastEditTime: 2019-11-08 09:45:40
  * @Description: 添加描述
  -->
 <template>
@@ -118,7 +118,7 @@ export default {
 
 .el-table {
   width: 1584px;
-  height: 735px;
+  height: 685px;
   box-shadow: 0px 3px 20px 0px rgba(51, 51, 51, 0.1);
   border-radius: 10px;
   border: 1px solid rgba(238, 238, 238, 1);

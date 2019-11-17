@@ -2,7 +2,7 @@
  * @Author: yangdan
  * @Date: 2019-10-15 14:10:17
  * @LastEditors: yangdan
- * @LastEditTime: 2019-11-04 10:17:16
+ * @LastEditTime: 2019-11-13 11:02:34
  * @Description: 添加描述
  -->
 <template>
@@ -76,9 +76,6 @@
           <LineChart :chartData="chartData"></LineChart>
         </el-col>
       </el-row>
-
-
-
     </div>
   </div>
 </template>
@@ -89,15 +86,13 @@ import titlieBox from "./components/titleBox";
 import pipeChart from "./components/pipeChart";
 import LineChart from "./components/LineChart";
 
-
 export default {
   name: "DashboardHome",
   components: {
     CardItem,
     titlieBox,
     pipeChart,
-    LineChart,
-
+    LineChart
   },
   data() {
     return {
@@ -173,8 +168,7 @@ export default {
           }
         ]
       },
-      Expand: true,
-
+      Expand: true
     };
   },
   methods: {},
@@ -183,53 +177,14 @@ export default {
 
     setTimeout(() => {
       this.$loading.hide();
-    }, 3000);
+    }, 1000);
   }
 };
 </script>
 
 <style lang="scss" scoped>
-p {
-  margin-block-start: 0;
-  margin-block-end: 0;
-  font-size: 24px;
-  font-weight: 500;
-  color: rgba(69, 68, 80, 1);
-  line-height: 37px;
-  padding: 0 0 10px 12px;
-}
-.container-box {
-  .dashboard-center,
-  .dashboard-footer {
-    box-shadow: 0px 2px 20px 0px rgba(36, 139, 242, 0.13);
-    border-radius: 10px;
-    border: 1px solid rgba(188, 218, 248, 1);
-  }
-}
+@import "./index.scss";
 </style>
 
-<style  scoped>
-.table-border >>> .el-table th.is-leaf,
-.el-table td {
-  border: 0 !important;
-}
-</style>
-
-<style lang="scss" scoped>
-.title-box {
-  color: #454450;
-  font-size: 24px;
-  line-height: 28px;
-  padding: 0 34px;
-  .title-p {
-    margin-block-start: 0;
-    margin-block-end: 0;
-    padding: 15px 0 0 0;
-  }
-  .el-divider--horizontal {
-    margin: 24px 0 10px 0;
-  }
-}
-</style>
 
 

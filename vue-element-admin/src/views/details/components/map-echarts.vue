@@ -2,7 +2,7 @@
  * @Author: yangdan
  * @Date: 2019-11-02 09:19:48
  * @LastEditors: yangdan
- * @LastEditTime: 2019-11-02 17:29:56
+ * @LastEditTime: 2019-11-11 14:26:07
  * @Description: 添加描述
  -->
 <template>
@@ -11,6 +11,7 @@
     <div>
       <el-amap
         vid="amapDemo"
+        :amap-manager="amapManager"
         :center="center"
         :zoom="zoom"
         :events="mapEvents"
@@ -19,17 +20,28 @@
         <!-- 标记点 -->
 
         <!-- 车的点 -->
-        <el-amap-marker :position="markerPosition" :content="carContent()"></el-amap-marker>
+        <el-amap-marker zIndex="100" :position="markerPosition" :content="carContent()"></el-amap-marker>
         <!-- 起点 -->
         <el-amap-marker
           :position="polyline.path[0]"
           zIndex="100"
           :content="getMarkerContentStart('发','贵州科特林水泥有限公司')"
         ></el-amap-marker>
+        <el-amap-marker
+          :position="polyline.path[0]"
+          zIndex="99"
+          :content="`<div class='startPoint'></div>`"
+        ></el-amap-marker>
         <!-- 终点 -->
         <el-amap-marker
           :position="EndMarkPosition(polyline.path)"
           :content="getMarkerContentStart('收','贵州科特林水泥有限公司')"
+        ></el-amap-marker>
+        <el-amap-marker
+          :position="EndMarkPosition(polyline.path)"
+          zIndex="100"
+          :content="
+          `<div class='endPoint'><span class='nav'></span></div>`"
         ></el-amap-marker>
         <!-- 事件的markes -->
 
@@ -46,11 +58,28 @@
     </div>
     <!-- echarts -->
     <div style="position:relative">
-      <div class="echarts-title">车辆重量和速度</div>
-      <transition name="list" mode="out-in">
-        <p v-if="echartsEvent">我是事件</p>
-      </transition>
-      <div id="myChart" :style="{width: '100%', height: '300px', paddingTop:'30px'}"></div>
+      <div class="echarts-title">
+        车辆重量和速度
+        <span>1</span>
+        <span>2</span>
+        <span>3</span>
+        <span>4</span>
+      </div>
+      <!-- markerPoint的部分 -->
+      <div style="display:flex">
+        <div>
+          <span class="tags" style="color:transparent;background-color: transparent;"></span>
+          <span class="tags" style="color:transparent;background-color: transparent;"></span>
+        </div>
+        <transition name="list" mode="out-in">
+          <div v-show="echartsEvent">
+            <span class="tags">贵州省铜仁大叔大婶市小小乡</span>
+            <span class="tags">空车装货 装货13吨 ,货物重量13吨</span>
+          </div>
+        </transition>
+      </div>
+
+      <div id="myChart" :style="{width: '100%', height: '300px', paddingTop:'5px'}"></div>
     </div>
   </div>
 </template>
@@ -59,19 +88,25 @@
 import echarts from "echarts";
 require("echarts/theme/macarons"); // echarts theme
 import resize from "./mixins/resize";
+import { AMapManager } from "vue-amap";
+let amapManager = new AMapManager();
 
 export default {
   name: "",
   // echarts配置
   mixins: [resize],
+
   data() {
+    let self = this;
     return {
       // map data
+      amapManager,
       center: [116.478998, 39.998555],
       zoom: 17,
       mapEvents: {
         init(o) {
           o.setMapStyle("amap://styles/1f7efa97a80abba5167638db8d03c397");
+
         }
       },
 
@@ -112,7 +147,6 @@ export default {
         editable: false
       },
       echartsEvent: false,
-
       // echarts data
       orderNumber: [
         100,
@@ -157,10 +191,10 @@ export default {
         40
       ],
       markPointData: [
-        { xAxis: 1, yAxis: 52 },
-        { xAxis: 5, yAxis: 160 },
-        { xAxis: 10, yAxis: 105 },
-        { xAxis: 15, yAxis: 52 }
+        { xAxis: 1, yAxis: 75 },
+        { xAxis: 5, yAxis: 120 },
+        { xAxis: 10, yAxis: 165 },
+        { xAxis: 15, yAxis: 75 }
       ]
     };
   },
@@ -169,9 +203,12 @@ export default {
     this.drawLine();
     this.markerPosition = this.polyline.path[0];
     console.log("刷新了");
+    let map = this.amapManager.getMap();
+
   },
   methods: {
     // map
+
     EndMarkPosition(path) {
       return path[path.length - 1];
     },
@@ -195,15 +232,13 @@ export default {
       // 绘制图表
       myChart.on("mouseover", params => {
         if (params.componentType === "markPoint") {
-          console.log("markPoint", params);
           this.echartsEvent = true;
         }
       });
 
       myChart.on("mouseout", params => {
         if (params.componentType === "markPoint") {
-          console.log("移出", params);
-          //  this.echartsEvent=false;
+          this.echartsEvent = false;
         }
       });
 
@@ -273,6 +308,7 @@ export default {
               this.polyline.path[index].lat
             ];
             this.markerPosition = path;
+
             return `<div>
               <p>${params[0].axisValueLabel}<p>
               <p style="display:flex;align-items:center">
@@ -332,18 +368,7 @@ export default {
                 }
               }
             },
-            markPoint: {
-              symbolSize: 30, //控制气泡大小
-              itemStyle: {
-                normal: {
-                  label: {
-                    show: true,
-                    color: "#000000" //气泡中字体颜色
-                  }
-                }
-              },
-              data: this.markPointData
-            },
+
             type: "line",
             yAxisIndex: 0,
             data: this.orderNumber,
@@ -364,6 +389,18 @@ export default {
                 }
               }
             },
+            markPoint: {
+              symbolSize: 30, //控制气泡大小
+              itemStyle: {
+                normal: {
+                  label: {
+                    show: true,
+                    color: "#000000" //气泡中字体颜色
+                  }
+                }
+              },
+              data: this.markPointData
+            },
             data: this.weight,
             yAxisIndex: 1,
             animationDuration: 2800,
@@ -377,11 +414,67 @@ export default {
 </script>
 
 <style lang="scss" scoped>
+p {
+  margin-block-start: 0;
+  margin-block-end: 0;
+}
 .el-vue-amap-echarts .amap-echarts {
   height: 441px;
   border-radius: 10px;
+
   #amapDemo {
     border-radius: 10px;
+  }
+
+  >>> .startPoint {
+    width: 18px;
+    height: 18px;
+    background-color: #fff;
+    border: 5px solid #248bf2;
+    border-radius: 50%;
+    position: relative;
+    top: 26px;
+    left: 1px;
+  }
+  >>> .endPoint {
+    position: relative;
+    top: 14px;
+    left: -17px;
+    .nav {
+      width: 26px;
+    }
+    .nav:before {
+      content: "";
+      height: 20px;
+      width: 20px;
+      display: block;
+      position: absolute;
+      top: -3px;
+      left: 15px;
+      z-index: 1;
+      line-height: 26px;
+      background: #fff;
+      border-radius: 40px;
+      border: 5px solid #248bf2;
+      -webkit-border-radius: 40px;
+      -moz-border-radius: 40px;
+      color: #fff;
+      text-align: center;
+    }
+    .nav:after {
+      content: "";
+      height: 0px;
+      width: 0px;
+      border: 10px transparent solid;
+      display: block;
+      position: absolute;
+      top: 14px;
+      left: 18px;
+      border-right: 7px solid transparent;
+      border-bottom: 7px solid #248bf2;
+      border-left: 7px solid transparent;
+      transform: rotate(180deg);
+    }
   }
   >>> .map-state {
     background-color: #248bf2;
@@ -418,6 +511,16 @@ export default {
   margin: 30px 0 0 24px;
   display: flex;
 }
+.tags {
+  border-radius: 5px;
+  background-color: #248bf2;
+  color: #fff;
+  padding: 2px 5px;
+  margin: 20px 0 5px 0;
+  font-size: 11px;
+}
+
+// 起点
 
 // 动画效果
 .list-enter-active,

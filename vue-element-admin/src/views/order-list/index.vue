@@ -1,10 +1,4 @@
-<!--
- * @Author: yangdan
- * @Date: 2019-09-19 18:20:19
- * @LastEditors: yangdan
- * @LastEditTime: 2019-11-04 10:48:33
- * @Description: 添加描述
- -->
+
 <template>
   <div class="basic-box">
     <div class="container-box">
@@ -53,7 +47,8 @@
 import MyTable from "./components/MyTable";
 import searchForm from "./components/form";
 import Dialog from "./components/Dialog";
-import { setTimeout } from 'timers';
+import { mapGetters } from "vuex";
+import { setTimeout } from "timers";
 
 export default {
   name: "Tab",
@@ -219,7 +214,7 @@ export default {
           size: 10,
           total: 40
         },
-        loading:true
+        loading: true
       },
       // form的数据和配置
       formConfig: {
@@ -300,18 +295,23 @@ export default {
       dialogTableVisible: false,
       orderNumDialog: "",
       plateNumberDialog: "",
-      driverDialog: "",
-
+      driverDialog: ""
     };
   },
   watch: {},
   created() {},
+  mounted() {
+    setTimeout(() => {
+      this.dataTable.loading = false;
+    }, 3000);
+    this.dataTable.pagination=this.PaginationData
+  },
   methods: {
     showCreatedTimes() {
       this.createdTimes = this.createdTimes + 1;
     },
     SignFor(a, b) {
-      console.log('签收')
+      console.log("签收");
       console.log("a", a, "b", b);
       this.orderNumDialog = b.one;
       this.plateNumberDialog = b.state;
@@ -320,7 +320,7 @@ export default {
     },
     HandleViewDetails() {
       console.log("查看详情");
-
+      this.$router.push("/details/index");
     },
     search() {
       console.log("form", this.form);
@@ -328,12 +328,11 @@ export default {
     handleSizeChange(val) {
       console.log("每页数val", val);
       this.$set(this.dataTable.pagination, "size", val);
-      console.log("this.dataTable.pagination", this.dataTable.pagination);
     },
     handleCurrentChange(val) {
-      console.log("当前页数val", val);
       this.$set(this.dataTable.pagination, "currentPage", val);
-      console.log("this.dataTable.pagination", this.dataTable.pagination);
+      this.$store.dispatch("test/changePagination", this.dataTable.pagination);
+      this.dataTable.pagination=this.PaginationData
     },
     cancel() {
       console.log("取消了");
@@ -344,74 +343,12 @@ export default {
       this.dialogTableVisible = false;
     }
   },
-  mounted() {
-    setTimeout(()=>{
-      this.dataTable.loading=false;
-    },3000)
+  computed: {
+    ...mapGetters(["PaginationData"])
   }
 };
 </script>
 
 <style lang="scss" scoped>
-.MyTable {
-  padding-top: 15px;
-}
-
-/* 弹窗 */
-.dialogTableVisible {
-  color: #333;
-  >>> ul {
-    padding-inline-start: 0;
-    list-style: none;
-    padding: 0 68px;
-    li span {
-      color: #666;
-      font-size: 14px;
-      line-height: 30px;
-    }
-    li span:nth-of-type(1) {
-      display: inline-block;
-      width: 80px;
-      text-align: left;
-      font-size: 16px;
-      font-weight: 600;
-    }
-  }
-  >>> .el-dialog {
-    border-radius: 10px;
-  }
-  >>> .el-dialog__title {
-    font-size: 26px;
-    font-weight: 500;
-  }
-  >>> .el-dialog__body {
-    padding: 0;
-  }
-  >>> .dialog-footer {
-    button:nth-of-type(1) {
-      margin-right: 50px;
-    }
-  }
-}
-</style>
-
-// 屏幕适配
-<style >
-@media (width: 320px) {
-  /* 时间选择样式 */
-  .el-range-editor.el-input__inner {
-    width: 200px;
-  }
-}
-@media (min-width: 320px) and (max-width: 500px) {
-  /* 时间选择样式 */
-  .el-range-editor.el-input__inner {
-    width: 180px;
-  }
-
-  .el-select .el-input__inner,
-  .el-input {
-    width: 180px;
-  }
-}
+@import "./index.scss";
 </style>

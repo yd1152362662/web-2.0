@@ -2,7 +2,7 @@
  * @Author: yangdan
  * @Date: 2019-09-19 18:20:19
  * @LastEditors: yangdan
- * @LastEditTime: 2019-10-24 16:09:42
+ * @LastEditTime: 2019-11-12 14:54:04
  * @Description: 添加描述
  */
 const getters = {
@@ -21,5 +21,6 @@ const getters = {
   routesTest:state => state.test.routes,
   errorLogs: state => state.errorLog.logs,
   get_routes: state => state.getRouter.routes,
+  PaginationData:state => state.test.pagination
 }
 export default getters
